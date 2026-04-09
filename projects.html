@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Doug Chingosho</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Project Cards Grid - Side by Side */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .project-card-full {
+            background: #2a2a2a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 35px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card-full:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(33, 150, 243, 0.25);
+            border-color: #2196f3;
+        }
+
+        .project-title {
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .project-tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tech-badge {
+            background: #1976d2;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .project-summary {
+            color: #b0b0b0;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            flex-grow: 1;
+            font-size: 1.05rem;
+        }
+
+        .project-metrics {
+            background: #212121;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 3px solid #2196f3;
+        }
+
+        .metric-item {
+            color: #b0b0b0;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .metric-item strong {
+            color: #64b5f6;
+        }
+
+        .project-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-app {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px 24px;
+            background: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .btn-app:hover {
+            background: #1976d2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-details {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px 24px;
+            background: transparent;
+            color: #64b5f6;
+            border: 2px solid #64b5f6;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .btn-details:hover {
+            background: #64b5f6;
+            color: #1a1a1a;
+        }
+
+        /* Modal for Details */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.85);
+        }
+
+        .modal-content {
+            background-color: #2a2a2a;
+            margin: 50px auto;
+            padding: 40px;
+            border: 1px solid #333;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 85vh;
+            overflow-y: auto;
+            color: #e0e0e0;
+        }
+
+        .close {
+            color: #b0b0b0;
+            float: right;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #64b5f6;
+        }
+
+        .modal-content h2 {
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-size: 2rem;
+        }
+
+        .modal-content h3 {
+            color: #64b5f6;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .modal-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .modal-content li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        .modal-content li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #2196f3;
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid #333;
+        }
+
+        .code-block code {
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 900px) {
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><img src="logo.png" alt="DC Logo" class="logo-img">Doug Chingosho</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link active">Projects</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Projects Portfolio</h1>
+            <p>Interactive Applications & Data Science Projects</p>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="projects-section" style="background: #1a1a1a; padding: 40px 20px;">
+        <div class="projects-container">
+
+            <!-- Project 1: Black-Scholes Options Pricer -->
+            <div class="project-card-full">
+                <div class="project-number">Project 1</div>
+                <h2 class="project-title">Black-Scholes Options Pricer</h2>
+                <div class="project-tech-tags">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Streamlit</span>
+                    <span class="tech-badge">Quantitative Finance</span>
+                </div>
+                <p class="project-summary">
+                    Interactive web application for pricing European options using the Black-Scholes-Merton model. 
+                    Features real-time Greeks calculation, volatility analysis, and Monte Carlo simulations.
+                </p>
+                <div class="project-metrics">
+                    <div class="metric-item"><strong>Accuracy:</strong> 99.9% vs Bloomberg</div>
+                    <div class="metric-item"><strong>Features:</strong> Delta, Gamma, Theta, Vega, Rho</div>
+                    <div class="metric-item"><strong>Simulation:</strong> 10,000+ paths</div>
+                </div>
+                <div class="project-buttons">
+                    <a href="https://doug-bsm-pricer.streamlit.app/" class="btn-app" target="_blank">🚀 Launch App</a>
+                    <button class="btn-details" onclick="openModal('modal1')">📋 View Details</button>
+                </div>
+            </div>
+
+            <!-- Project 2: Loan Default Prediction -->
+            <div class="project-card-full">
+                <div class="project-number">Project 2</div>
+                <h2 class="project-title">Loan Default Prediction Model</h2>
+                <div class="project-tech-tags">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Machine Learning</span>
+                    <span class="tech-badge">XGBoost</span>
+                </div>
+                <p class="project-summary">
+                    Predictive model for loan default risk using ensemble machine learning. 
+                    Analyzes 50+ features including credit history, income, and payment patterns.
+                </p>
+                <div class="project-metrics">
+                    <div class="metric-item"><strong>Accuracy:</strong> 87%</div>
+                    <div class="metric-item"><strong>ROC-AUC:</strong> 0.91</div>
+                    <div class="metric-item"><strong>Precision:</strong> 83% | <strong>Recall:</strong> 79%</div>
+                </div>
+                <div class="project-buttons">
+                    <a href="https://doug-credit-risk-default-prediction.streamlit.app/" class="btn-app" target="_blank">🚀 Launch App</a>
+                    <button class="btn-details" onclick="openModal('modal2')">📋 View Details</button>
+                    </div>
+            </div>
+
+            <!-- Project 3: Portfolio Optimization -->
+            <div class="project-card-full">
+                <div class="project-number">Project 3</div>
+                <h2 class="project-title">Markowitz Portfolio Optimizer</h2>
+                <div class="project-tech-tags">
+                    <span class="tech-badge">R</span>
+                    <span class="tech-badge">Shiny</span>
+                    <span class="tech-badge">Portfolio Theory</span>
+                </div>
+                <p class="project-summary">
+                    Interactive dashboard for portfolio optimization using Modern Portfolio Theory. 
+                    Calculates efficient frontier and optimal asset allocations.
+                </p>
+                <div class="project-metrics">
+                    <div class="metric-item"><strong>Outperformance:</strong> +15% vs equal-weight</div>
+                    <div class="metric-item"><strong>Risk Reduction:</strong> 25% volatility decrease</div>
+                    <div class="metric-item"><strong>Features:</strong> Sharpe ratio optimization</div>
+                </div>
+                <div class="project-buttons">
+                    <a href="#" class="btn-app" target="_blank">🚀 Launch App</a>
+                    <button class="btn-details" onclick="openModal('modal3')">📋 View Details</button>
+                    </div>
+            </div>
+
+            <!-- Project 4: Fama-French Analysis -->
+            <div class="project-card-full">
+                <div class="project-number">Project 4</div>
+                <h2 class="project-title">Fama-French 3-Factor Analysis</h2>
+                <div class="project-tech-tags">
+                    <span class="tech-badge">R</span>
+                    <span class="tech-badge">Econometrics</span>
+                    <span class="tech-badge">Asset Pricing</span>
+                </div>
+                <p class="project-summary">
+                    Statistical analysis of Disney and Amazon stock returns using the Fama-French 3-factor model. 
+                    Estimated factor loadings for market risk, size, and value premiums.
+                </p>
+                <div class="project-metrics">
+                    <div class="metric-item"><strong>Dataset:</strong> 92 weekly observations (2013-2014)</div>
+                    <div class="metric-item"><strong>R² (Disney):</strong> 42.89%</div>
+                    <div class="metric-item"><strong>R² (Amazon):</strong> 27.58%</div>
+                </div>
+                <div class="project-buttons">
+                    <button class="btn-details" onclick="openModal('modal4')">📋 View Details</button>
+                    <a href="#" class="btn-details" target="_blank">📊 View Report</a>
+                </div>
+            </div>
+
+            <!-- Project 5: Tableau Dashboards -->
+            <div class="project-card-full">
+                <h2 class="project-title">Tableau Dashboards</h2>
+                <div class="project-tech-tags">
+                    <span class="tech-badge">Tableau</span>
+                    <span class="tech-badge">Data Visualization</span>
+                    <span class="tech-badge">Business Intelligence</span>
+                </div>
+                <p class="project-summary">
+                    Interactive business intelligence dashboard analyzing global retail sales performance 
+                    with geographic mapping and drill-down capabilities.
+                </p>
+                <div class="project-metrics">
+                    <div class="metric-item"><strong>Features:</strong> KPI tracking, trend analysis</div>
+                    <div class="metric-item"><strong>Views:</strong> Sales, profit, customer segments</div>
+                    <div class="metric-item"><strong>Interactivity:</strong> Filters and parameters</div>
+                </div>
+                <div class="project-buttons">
+                    <a href="https://public.tableau.com/app/profile/douglas.chingosho/vizzes" class="btn-app" target="_blank">📊 View Dashboard</a>
+                    <button class="btn-details" onclick="openModal('modal5')">📋 View Details</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Modals for Project Details -->
+    <!-- Modal 1: Options Pricer -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal1')">&times;</span>
+            <h2>Black-Scholes Options Pricer - Technical Details</h2>
+            
+            <h3>Project Overview</h3>
+            <p>Comprehensive options pricing application implementing the Black-Scholes-Merton model for European options with real-time Greeks calculation and Monte Carlo simulation capabilities.</p>
+            
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>Black-Scholes Pricing:</strong> Analytical solution for European call and put options</li>
+                <li><strong>Greeks Calculator:</strong> Real-time Delta, Gamma, Theta, Vega, and Rho</li>
+                <li><strong>Volatility Analysis:</strong> Implied volatility using Newton-Raphson method</li>
+                <li><strong>Monte Carlo Simulation:</strong> 10,000+ path simulations for exotic options</li>
+                <li><strong>Volatility Smile:</strong> Interactive visualization of volatility skew across strikes</li>
+                <li><strong>Sensitivity Analysis:</strong> Heatmaps showing option value changes</li>
+            </ul>
+
+            <h3>Technical Stack</h3>
+            <ul>
+                <li>Python 3.9 with NumPy, SciPy</li>
+                <li>Streamlit for interactive web interface</li>
+                <li>Plotly for visualizations</li>
+                <li>Pandas for data handling</li>
+            </ul>
+
+            <h3>Code Sample</h3>
+            <div class="code-block">
+                <code>
+import numpy as np<br>
+from scipy.stats import norm<br><br>
+
+def black_scholes_price(S, K, T, r, sigma, option_type='call'):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"""Calculate Black-Scholes option price"""<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d1 = (np.log(S/K) + (r + 0.5*sigma**2)*T) / (sigma*np.sqrt(T))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d2 = d1 - sigma*np.sqrt(T)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if option_type == 'call':<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return S*norm.cdf(d1) - K*np.exp(-r*T)*norm.cdf(d2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return K*np.exp(-r*T)*norm.cdf(-d2) - S*norm.cdf(-d1)
+                </code>
+            </div>
+
+            <h3>Results & Impact</h3>
+            <ul>
+                <li>99.9% accuracy compared to Bloomberg terminal prices</li>
+                <li>Greeks validated against professional trading platforms</li>
+                <li>Monte Carlo convergence within 0.5% of analytical solutions</li>
+                <li>Processing time < 0.1 seconds for single option pricing</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal 2: Loan Default -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal2')">&times;</span>
+            <h2>Loan Default Prediction - Technical Details</h2>
+            
+            <h3>Project Overview</h3>
+            <p>Machine learning model predicting loan default risk using ensemble techniques. Analyzes borrower characteristics, financial history, and loan attributes to provide probability scores.</p>
+            
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>Feature Engineering:</strong> 50+ features including debt-to-income, credit utilization, payment history</li>
+                <li><strong>Ensemble Modeling:</strong> XGBoost, Random Forest, Logistic Regression with weighted voting</li>
+                <li><strong>Class Imbalance:</strong> SMOTE for synthetic minority oversampling</li>
+                <li><strong>Model Interpretability:</strong> SHAP values for feature importance</li>
+                <li><strong>Risk Segmentation:</strong> Low, Medium, High, Very High risk categorization</li>
+                <li><strong>Production Pipeline:</strong> Automated end-to-end prediction workflow</li>
+            </ul>
+
+            <h3>Model Performance</h3>
+            <ul>
+                <li>Accuracy: 87%</li>
+                <li>ROC-AUC Score: 0.91</li>
+                <li>Precision: 83%</li>
+                <li>Recall: 79%</li>
+                <li>Dataset: 250,000+ loan applications</li>
+            </ul>
+
+            <h3>Top Predictive Features</h3>
+            <ul>
+                <li><strong>Credit Score (FICO):</strong> 25% feature importance</li>
+                <li><strong>Debt-to-Income Ratio:</strong> 18% importance</li>
+                <li><strong>Employment Length:</strong> 12% importance</li>
+                <li><strong>Loan Amount:</strong> 10% importance</li>
+                <li><strong>Credit Inquiries:</strong> 8% importance</li>
+            </ul>
+
+            <h3>Business Impact</h3>
+            <ul>
+                <li>Identifies 79% of defaults, reducing bad debt exposure</li>
+                <li>Enables approval of creditworthy borderline applicants</li>
+                <li>Real-time predictions reduce processing time from days to minutes</li>
+                <li>Explainable AI ensures transparency and regulatory compliance</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal 3: Portfolio Optimization -->
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal3')">&times;</span>
+            <h2>Portfolio Optimization - Technical Details</h2>
+            
+            <h3>Project Overview</h3>
+            <p>Interactive Shiny dashboard implementing Modern Portfolio Theory using quadratic programming for optimal asset allocation.</p>
+            
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>Efficient Frontier:</strong> Visualization of risk-return tradeoffs</li>
+                <li><strong>Sharpe Ratio Optimization:</strong> Maximum risk-adjusted returns</li>
+                <li><strong>Minimum Variance Portfolio:</strong> Lowest-risk allocation</li>
+                <li><strong>Custom Constraints:</strong> Position limits, sector constraints, long/short</li>
+                <li><strong>Interactive Dashboard:</strong> Real-time portfolio adjustments</li>
+                <li><strong>Historical Backtesting:</strong> Performance validation</li>
+            </ul>
+
+            <h3>Results</h3>
+            <ul>
+                <li>15% annual outperformance vs equal-weight benchmark</li>
+                <li>25% reduction in portfolio volatility</li>
+                <li>Real-time Yahoo Finance data integration</li>
+                <li>Support for 20+ asset portfolios</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal 4: Fama-French -->
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal4')">&times;</span>
+            <h2>Fama-French Analysis - Technical Details</h2>
+            
+            <h3>Project Overview</h3>
+            <p>Empirical analysis of Disney (DIS) and Amazon (AMZN) stock returns using the Fama-French 3-factor model with weekly data from 2013-2014.</p>
+            
+            <h3>Regression Results</h3>
+            <p><strong>Disney (DIS):</strong></p>
+            <ul>
+                <li>Market Beta: 1.095 (highly significant, p<0.0001)</li>
+                <li>SMB Factor: -0.373 (marginally sig, p=0.078) → Large-cap stock</li>
+                <li>HML Factor: -0.496 (marginally sig, p=0.067) → Growth stock</li>
+                <li>R²: 42.89%</li>
+            </ul>
+
+            <p><strong>Amazon (AMZN):</strong></p>
+            <ul>
+                <li>Market Beta: 1.092 (highly significant, p<0.0001)</li>
+                <li>SMB Factor: 0.471 (not sig, p=0.220) → Mid-cap tendencies</li>
+                <li>HML Factor: -1.268 (sig, p=0.011) → Strong growth stock</li>
+                <li>R²: 27.58%</li>
+            </ul>
+
+            <h3>Key Findings</h3>
+            <ul>
+                <li>Both stocks have similar market betas (~1.09)</li>
+                <li>Disney is large-cap growth, Amazon is mid-cap strong growth</li>
+                <li>Model explains Disney better (higher R²)</li>
+                <li>Amazon has more idiosyncratic risk</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal 5: Tableau -->
+    <div id="modal5" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal5')">&times;</span>
+            <h2>Tableau Dashboard - Technical Details</h2>
+            
+            <h3>Project Overview</h3>
+            <p>Interactive business intelligence dashboard analyzing Global Superstore sales performance with drill-down capabilities and geographic mapping.</p>
+            
+            <h3>Dashboard Features</h3>
+            <ul>
+                <li>Sales and profit trends over time</li>
+                <li>Geographic heat map of regional performance</li>
+                <li>Product category profitability analysis</li>
+                <li>Customer segment comparison</li>
+                <li>Top/bottom performers identification</li>
+                <li>Interactive filters and parameters</li>
+            </ul>
+
+            <h3>Insights Delivered</h3>
+            <ul>
+                <li>Identified underperforming product categories</li>
+                <li>Regional sales patterns and opportunities</li>
+                <li>Customer segment profitability analysis</li>
+                <li>Seasonal trends and forecasting</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Doug Chingosho | MS Fintech Analytics, Washington University in St. Louis</p>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/douglas-tawanda-chingosho" target="_blank">LinkedIn</a>
+                <a href="https://github.com/doug1192" target="_blank">GitHub</a>
+                <a href="mailto:douglasc@wustl.edu">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let modal of modals) {
+                i
+f (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
