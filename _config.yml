@@ -1,0 +1,3 @@
+# GitHub Pages Jekyll config
+# Enables clean URLs - /about instead of /about.html
+permalink: pretty
