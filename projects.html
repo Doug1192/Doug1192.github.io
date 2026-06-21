@@ -6,7 +6,6 @@
     <title>Projects - Doug Chingosho</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Project Cards Grid - Side by Side */
         .projects-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -15,7 +14,6 @@
             margin: 60px auto;
             padding: 0 20px;
         }
-
         .project-card-full {
             background: #2a2a2a;
             border: 1px solid #333;
@@ -25,26 +23,22 @@
             display: flex;
             flex-direction: column;
         }
-
         .project-card-full:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 35px rgba(33, 150, 243, 0.25);
             border-color: #2196f3;
         }
-
         .project-title {
             font-size: 1.6rem;
             color: #ffffff;
             margin-bottom: 15px;
         }
-
         .project-tech-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 20px;
         }
-
         .tech-badge {
             background: #1976d2;
             color: white;
@@ -53,7 +47,6 @@
             font-size: 0.85rem;
             font-weight: 600;
         }
-
         .project-summary {
             color: #b0b0b0;
             line-height: 1.8;
@@ -61,7 +54,6 @@
             flex-grow: 1;
             font-size: 1.05rem;
         }
-
         .project-metrics {
             background: #212121;
             padding: 20px;
@@ -69,23 +61,19 @@
             margin-bottom: 25px;
             border-left: 3px solid #2196f3;
         }
-
         .metric-item {
             color: #b0b0b0;
             margin-bottom: 8px;
             font-size: 0.95rem;
         }
-
         .metric-item strong {
             color: #64b5f6;
         }
-
         .project-buttons {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
         }
-
         .btn-app {
             flex: 1;
             min-width: 150px;
@@ -99,14 +87,29 @@
             transition: all 0.3s ease;
             text-align: center;
             font-size: 0.95rem;
+            text-decoration: none;
+            display: inline-block;
         }
-
         .btn-app:hover {
             background: #1976d2;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+            color: white;
         }
-
+        .btn-app-disabled {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px 24px;
+            background: #444;
+            color: #888;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: not-allowed;
+            text-align: center;
+            font-size: 0.95rem;
+            display: inline-block;
+        }
         .btn-details {
             flex: 1;
             min-width: 150px;
@@ -121,13 +124,10 @@
             text-align: center;
             font-size: 0.95rem;
         }
-
         .btn-details:hover {
             background: #64b5f6;
             color: #1a1a1a;
         }
-
-        /* Modal for Details */
         .modal {
             display: none;
             position: fixed;
@@ -139,7 +139,6 @@
             overflow: auto;
             background-color: rgba(0,0,0,0.85);
         }
-
         .modal-content {
             background-color: #2a2a2a;
             margin: 50px auto;
@@ -152,7 +151,6 @@
             overflow-y: auto;
             color: #e0e0e0;
         }
-
         .close {
             color: #b0b0b0;
             float: right;
@@ -161,70 +159,18 @@
             cursor: pointer;
             transition: color 0.3s ease;
         }
-
-        .close:hover {
-            color: #64b5f6;
-        }
-
-        .modal-content h2 {
-            color: #ffffff;
-            margin-bottom: 25px;
-            font-size: 2rem;
-        }
-
-        .modal-content h3 {
-            color: #64b5f6;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-
-        .modal-content ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .modal-content li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
-            color: #b0b0b0;
-            line-height: 1.6;
-        }
-
-        .modal-content li:before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: #2196f3;
-            font-weight: bold;
-        }
-
-        .code-block {
-            background: #1a1a1a;
-            padding: 20px;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 20px 0;
-            border: 1px solid #333;
-        }
-
-        .code-block code {
-            color: #e0e0e0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        @media (max-width: 900px) {
-            .projects-container {
-                grid-template-columns: 1fr;
-            }
-        }
+        .close:hover { color: #64b5f6; }
+        .modal-content h2 { color: #ffffff; margin-bottom: 25px; font-size: 2rem; }
+        .modal-content h3 { color: #64b5f6; margin-top: 30px; margin-bottom: 15px; font-size: 1.4rem; }
+        .modal-content ul { list-style: none; padding-left: 0; }
+        .modal-content li { padding: 8px 0 8px 25px; position: relative; color: #b0b0b0; line-height: 1.6; }
+        .modal-content li:before { content: "▸"; position: absolute; left: 0; color: #2196f3; font-weight: bold; }
+        .code-block { background: #1a1a1a; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 20px 0; border: 1px solid #333; }
+        .code-block code { color: #e0e0e0; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.5; }
+        @media (max-width: 900px) { .projects-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo"><img src="logo.png" alt="DC Logo" class="logo-img">Doug Chingosho</a>
@@ -237,7 +183,6 @@
         </div>
     </nav>
 
-    <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1>Projects Portfolio</h1>
@@ -245,11 +190,10 @@
         </div>
     </section>
 
-    <!-- Projects Grid -->
     <section class="projects-section" style="background: #1a1a1a; padding: 40px 20px;">
         <div class="projects-container">
 
-            <!-- Project 1: Black-Scholes Options Pricer -->
+            <!-- PROJECT 1: Black-Scholes -->
             <div class="project-card-full">
                 <div class="project-number">Project 1</div>
                 <h2 class="project-title">Black-Scholes Options Pricer</h2>
@@ -273,81 +217,9 @@
                 </div>
             </div>
 
-            <!-- Project 2: Loan Default Prediction -->
+            <!-- PROJECT 2: Tableau Dashboards -->
             <div class="project-card-full">
                 <div class="project-number">Project 2</div>
-                <h2 class="project-title">Loan Default Prediction Model</h2>
-                <div class="project-tech-tags">
-                    <span class="tech-badge">Python</span>
-                    <span class="tech-badge">Machine Learning</span>
-                    <span class="tech-badge">XGBoost</span>
-                </div>
-                <p class="project-summary">
-                    Predictive model for loan default risk using ensemble machine learning. 
-                    Analyzes 50+ features including credit history, income, and payment patterns.
-                </p>
-                <div class="project-metrics">
-                    <div class="metric-item"><strong>Accuracy:</strong> 87%</div>
-                    <div class="metric-item"><strong>ROC-AUC:</strong> 0.91</div>
-                    <div class="metric-item"><strong>Precision:</strong> 83% | <strong>Recall:</strong> 79%</div>
-                </div>
-                <div class="project-buttons">
-                    <a href="https://doug-credit-risk-default-prediction.streamlit.app/" class="btn-app" target="_blank">🚀 Launch App</a>
-                    <button class="btn-details" onclick="openModal('modal2')">📋 View Details</button>
-                    </div>
-            </div>
-
-            <!-- Project 3: Portfolio Optimization -->
-            <div class="project-card-full">
-                <div class="project-number">Project 3</div>
-                <h2 class="project-title">Markowitz Portfolio Optimizer</h2>
-                <div class="project-tech-tags">
-                    <span class="tech-badge">R</span>
-                    <span class="tech-badge">Shiny</span>
-                    <span class="tech-badge">Portfolio Theory</span>
-                </div>
-                <p class="project-summary">
-                    Interactive dashboard for portfolio optimization using Modern Portfolio Theory. 
-                    Calculates efficient frontier and optimal asset allocations.
-                </p>
-                <div class="project-metrics">
-                    <div class="metric-item"><strong>Outperformance:</strong> +15% vs equal-weight</div>
-                    <div class="metric-item"><strong>Risk Reduction:</strong> 25% volatility decrease</div>
-                    <div class="metric-item"><strong>Features:</strong> Sharpe ratio optimization</div>
-                </div>
-                <div class="project-buttons">
-                    <a href="#" class="btn-app" target="_blank">🚀 Launch App</a>
-                    <button class="btn-details" onclick="openModal('modal3')">📋 View Details</button>
-                    </div>
-            </div>
-
-            <!-- Project 4: Fama-French Analysis -->
-            <div class="project-card-full">
-                <div class="project-number">Project 4</div>
-                <h2 class="project-title">Fama-French 3-Factor Analysis</h2>
-                <div class="project-tech-tags">
-                    <span class="tech-badge">R</span>
-                    <span class="tech-badge">Econometrics</span>
-                    <span class="tech-badge">Asset Pricing</span>
-                </div>
-                <p class="project-summary">
-                    Statistical analysis of Disney and Amazon stock returns using the Fama-French 3-factor model. 
-                    Estimated factor loadings for market risk, size, and value premiums.
-                </p>
-                <div class="project-metrics">
-                    <div class="metric-item"><strong>Dataset:</strong> 92 weekly observations (2013-2014)</div>
-                    <div class="metric-item"><strong>R² (Disney):</strong> 42.89%</div>
-                    <div class="metric-item"><strong>R² (Amazon):</strong> 27.58%</div>
-                </div>
-                <div class="project-buttons">
-                    <button class="btn-details" onclick="openModal('modal4')">📋 View Details</button>
-                    <a href="#" class="btn-details" target="_blank">📊 View Report</a>
-                </div>
-            </div>
-
-            <!-- Project 5: Tableau Dashboards -->
-            <div class="project-card-full">
-                <div class="project-number">Project 5</div>
                 <h2 class="project-title">Tableau Dashboards</h2>
                 <div class="project-tech-tags">
                     <span class="tech-badge">Tableau</span>
@@ -365,6 +237,80 @@
                 </div>
                 <div class="project-buttons">
                     <a href="https://public.tableau.com/app/profile/douglas.chingosho/vizzes" class="btn-app" target="_blank">📊 View Dashboard</a>
+                    <button class="btn-details" onclick="openModal('modal2')">📋 View Details</button>
+                </div>
+            </div>
+
+            <!-- PROJECT 3: Juicee!! -->
+            <div class="project-card-full">
+                <div class="project-number">Project 3</div>
+                <h2 class="project-title">Juicee!! Sales Tracking App</h2>
+                <div class="project-tech-tags">
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">Supabase</span>
+                    <span class="tech-badge">PostgreSQL</span>
+                    <span class="tech-badge">Netlify</span>
+                </div>
+                <p class="project-summary">
+                    Full-stack web-based sales tracking application built for an Infinite Reach direct sales team. 
+                    Features role-based access control, real-time leaderboards, audit trails, and Excel export — 
+                    enabling managers and reps to track performance and drive accountability across the team.
+                </p>
+                <div class="project-metrics">
+                    <div class="metric-item"><strong>Backend:</strong> Supabase PostgreSQL with Row-Level Security</div>
+                    <div class="metric-item"><strong>Features:</strong> Real-time leaderboard, audit trail, Excel export</div>
+                    <div class="metric-item"><strong>Access:</strong> Role-based (Admin / Manager / Rep)</div>
+                </div>
+                <div class="project-buttons">
+                    <a href="https://juicee-sales.netlify.app/" class="btn-app" target="_blank">🚀 Launch App</a>
+                    <button class="btn-details" onclick="openModal('modal3')">📋 View Details</button>
+                </div>
+            </div>
+
+            <!-- PROJECT 4: Loan Default -->
+            <div class="project-card-full">
+                <div class="project-number">Project 4</div>
+                <h2 class="project-title">Loan Default Prediction Model</h2>
+                <div class="project-tech-tags">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Machine Learning</span>
+                    <span class="tech-badge">XGBoost</span>
+                </div>
+                <p class="project-summary">
+                    Predictive model for loan default risk using ensemble machine learning. 
+                    Analyzes 50+ features including credit history, income, and payment patterns.
+                </p>
+                <div class="project-metrics">
+                    <div class="metric-item"><strong>Accuracy:</strong> 87%</div>
+                    <div class="metric-item"><strong>ROC-AUC:</strong> 0.91</div>
+                    <div class="metric-item"><strong>Precision:</strong> 83% | <strong>Recall:</strong> 79%</div>
+                </div>
+                <div class="project-buttons">
+                    <a href="https://doug-credit-risk-default-prediction.streamlit.app/" class="btn-app" target="_blank">🚀 Launch App</a>
+                    <button class="btn-details" onclick="openModal('modal4')">📋 View Details</button>
+                </div>
+            </div>
+
+            <!-- PROJECT 5: Markowitz — Coming Soon -->
+            <div class="project-card-full">
+                <div class="project-number">Project 5</div>
+                <h2 class="project-title">Markowitz Portfolio Optimizer</h2>
+                <div class="project-tech-tags">
+                    <span class="tech-badge">R</span>
+                    <span class="tech-badge">Shiny</span>
+                    <span class="tech-badge">Portfolio Theory</span>
+                </div>
+                <p class="project-summary">
+                    Interactive dashboard for portfolio optimization using Modern Portfolio Theory. 
+                    Calculates efficient frontier and optimal asset allocations.
+                </p>
+                <div class="project-metrics">
+                    <div class="metric-item"><strong>Outperformance:</strong> +15% vs equal-weight</div>
+                    <div class="metric-item"><strong>Risk Reduction:</strong> 25% volatility decrease</div>
+                    <div class="metric-item"><strong>Features:</strong> Sharpe ratio optimization</div>
+                </div>
+                <div class="project-buttons">
+                    <span class="btn-app-disabled">🚧 Coming Soon</span>
                     <button class="btn-details" onclick="openModal('modal5')">📋 View Details</button>
                 </div>
             </div>
@@ -372,16 +318,13 @@
         </div>
     </section>
 
-    <!-- Modals for Project Details -->
-    <!-- Modal 1: Options Pricer -->
+    <!-- MODAL 1: Black-Scholes -->
     <div id="modal1" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('modal1')">&times;</span>
             <h2>Black-Scholes Options Pricer - Technical Details</h2>
-            
             <h3>Project Overview</h3>
             <p>Comprehensive options pricing application implementing the Black-Scholes-Merton model for European options with real-time Greeks calculation and Monte Carlo simulation capabilities.</p>
-            
             <h3>Key Features</h3>
             <ul>
                 <li><strong>Black-Scholes Pricing:</strong> Analytical solution for European call and put options</li>
@@ -391,7 +334,6 @@
                 <li><strong>Volatility Smile:</strong> Interactive visualization of volatility skew across strikes</li>
                 <li><strong>Sensitivity Analysis:</strong> Heatmaps showing option value changes</li>
             </ul>
-
             <h3>Technical Stack</h3>
             <ul>
                 <li>Python 3.9 with NumPy, SciPy</li>
@@ -399,13 +341,11 @@
                 <li>Plotly for visualizations</li>
                 <li>Pandas for data handling</li>
             </ul>
-
             <h3>Code Sample</h3>
             <div class="code-block">
                 <code>
 import numpy as np<br>
 from scipy.stats import norm<br><br>
-
 def black_scholes_price(S, K, T, r, sigma, option_type='call'):<br>
 &nbsp;&nbsp;&nbsp;&nbsp;"""Calculate Black-Scholes option price"""<br>
 &nbsp;&nbsp;&nbsp;&nbsp;d1 = (np.log(S/K) + (r + 0.5*sigma**2)*T) / (sigma*np.sqrt(T))<br>
@@ -417,138 +357,23 @@ def black_scholes_price(S, K, T, r, sigma, option_type='call'):<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return K*np.exp(-r*T)*norm.cdf(-d2) - S*norm.cdf(-d1)
                 </code>
             </div>
-
             <h3>Results & Impact</h3>
             <ul>
                 <li>99.9% accuracy compared to Bloomberg terminal prices</li>
                 <li>Greeks validated against professional trading platforms</li>
                 <li>Monte Carlo convergence within 0.5% of analytical solutions</li>
-                <li>Processing time < 0.1 seconds for single option pricing</li>
+                <li>Processing time &lt; 0.1 seconds for single option pricing</li>
             </ul>
         </div>
     </div>
 
-    <!-- Modal 2: Loan Default -->
+    <!-- MODAL 2: Tableau -->
     <div id="modal2" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('modal2')">&times;</span>
-            <h2>Loan Default Prediction - Technical Details</h2>
-            
-            <h3>Project Overview</h3>
-            <p>Machine learning model predicting loan default risk using ensemble techniques. Analyzes borrower characteristics, financial history, and loan attributes to provide probability scores.</p>
-            
-            <h3>Key Features</h3>
-            <ul>
-                <li><strong>Feature Engineering:</strong> 50+ features including debt-to-income, credit utilization, payment history</li>
-                <li><strong>Ensemble Modeling:</strong> XGBoost, Random Forest, Logistic Regression with weighted voting</li>
-                <li><strong>Class Imbalance:</strong> SMOTE for synthetic minority oversampling</li>
-                <li><strong>Model Interpretability:</strong> SHAP values for feature importance</li>
-                <li><strong>Risk Segmentation:</strong> Low, Medium, High, Very High risk categorization</li>
-                <li><strong>Production Pipeline:</strong> Automated end-to-end prediction workflow</li>
-            </ul>
-
-            <h3>Model Performance</h3>
-            <ul>
-                <li>Accuracy: 87%</li>
-                <li>ROC-AUC Score: 0.91</li>
-                <li>Precision: 83%</li>
-                <li>Recall: 79%</li>
-                <li>Dataset: 250,000+ loan applications</li>
-            </ul>
-
-            <h3>Top Predictive Features</h3>
-            <ul>
-                <li><strong>Credit Score (FICO):</strong> 25% feature importance</li>
-                <li><strong>Debt-to-Income Ratio:</strong> 18% importance</li>
-                <li><strong>Employment Length:</strong> 12% importance</li>
-                <li><strong>Loan Amount:</strong> 10% importance</li>
-                <li><strong>Credit Inquiries:</strong> 8% importance</li>
-            </ul>
-
-            <h3>Business Impact</h3>
-            <ul>
-                <li>Identifies 79% of defaults, reducing bad debt exposure</li>
-                <li>Enables approval of creditworthy borderline applicants</li>
-                <li>Real-time predictions reduce processing time from days to minutes</li>
-                <li>Explainable AI ensures transparency and regulatory compliance</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Modal 3: Portfolio Optimization -->
-    <div id="modal3" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('modal3')">&times;</span>
-            <h2>Portfolio Optimization - Technical Details</h2>
-            
-            <h3>Project Overview</h3>
-            <p>Interactive Shiny dashboard implementing Modern Portfolio Theory using quadratic programming for optimal asset allocation.</p>
-            
-            <h3>Key Features</h3>
-            <ul>
-                <li><strong>Efficient Frontier:</strong> Visualization of risk-return tradeoffs</li>
-                <li><strong>Sharpe Ratio Optimization:</strong> Maximum risk-adjusted returns</li>
-                <li><strong>Minimum Variance Portfolio:</strong> Lowest-risk allocation</li>
-                <li><strong>Custom Constraints:</strong> Position limits, sector constraints, long/short</li>
-                <li><strong>Interactive Dashboard:</strong> Real-time portfolio adjustments</li>
-                <li><strong>Historical Backtesting:</strong> Performance validation</li>
-            </ul>
-
-            <h3>Results</h3>
-            <ul>
-                <li>15% annual outperformance vs equal-weight benchmark</li>
-                <li>25% reduction in portfolio volatility</li>
-                <li>Real-time Yahoo Finance data integration</li>
-                <li>Support for 20+ asset portfolios</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Modal 4: Fama-French -->
-    <div id="modal4" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('modal4')">&times;</span>
-            <h2>Fama-French Analysis - Technical Details</h2>
-            
-            <h3>Project Overview</h3>
-            <p>Empirical analysis of Disney (DIS) and Amazon (AMZN) stock returns using the Fama-French 3-factor model with weekly data from 2013-2014.</p>
-            
-            <h3>Regression Results</h3>
-            <p><strong>Disney (DIS):</strong></p>
-            <ul>
-                <li>Market Beta: 1.095 (highly significant, p<0.0001)</li>
-                <li>SMB Factor: -0.373 (marginally sig, p=0.078) → Large-cap stock</li>
-                <li>HML Factor: -0.496 (marginally sig, p=0.067) → Growth stock</li>
-                <li>R²: 42.89%</li>
-            </ul>
-
-            <p><strong>Amazon (AMZN):</strong></p>
-            <ul>
-                <li>Market Beta: 1.092 (highly significant, p<0.0001)</li>
-                <li>SMB Factor: 0.471 (not sig, p=0.220) → Mid-cap tendencies</li>
-                <li>HML Factor: -1.268 (sig, p=0.011) → Strong growth stock</li>
-                <li>R²: 27.58%</li>
-            </ul>
-
-            <h3>Key Findings</h3>
-            <ul>
-                <li>Both stocks have similar market betas (~1.09)</li>
-                <li>Disney is large-cap growth, Amazon is mid-cap strong growth</li>
-                <li>Model explains Disney better (higher R²)</li>
-                <li>Amazon has more idiosyncratic risk</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Modal 5: Tableau -->
-    <div id="modal5" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('modal5')">&times;</span>
-            <h2>Tableau Dashboard - Technical Details</h2>
-            
+            <h2>Tableau Dashboards - Technical Details</h2>
             <h3>Project Overview</h3>
             <p>Interactive business intelligence dashboard analyzing Global Superstore sales performance with drill-down capabilities and geographic mapping.</p>
-            
             <h3>Dashboard Features</h3>
             <ul>
                 <li>Sales and profit trends over time</li>
@@ -558,7 +383,6 @@ def black_scholes_price(S, K, T, r, sigma, option_type='call'):<br>
                 <li>Top/bottom performers identification</li>
                 <li>Interactive filters and parameters</li>
             </ul>
-
             <h3>Insights Delivered</h3>
             <ul>
                 <li>Identified underperforming product categories</li>
@@ -569,7 +393,109 @@ def black_scholes_price(S, K, T, r, sigma, option_type='call'):<br>
         </div>
     </div>
 
-    <!-- Footer -->
+    <!-- MODAL 3: Juicee!! -->
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal3')">&times;</span>
+            <h2>Juicee!! Sales Tracking App - Technical Details</h2>
+            <h3>Project Overview</h3>
+            <p>Full-stack web application built for the Infinite Reach direct sales team to track daily sales performance, manage team members, and drive accountability through real-time leaderboards and detailed audit trails. Deployed on Netlify with a Supabase PostgreSQL backend.</p>
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>Role-Based Access Control:</strong> Admin, Manager, and Rep roles with different permissions and views</li>
+                <li><strong>Real-Time Leaderboard:</strong> Live rankings updated instantly as sales are logged</li>
+                <li><strong>Sales Entry & Tracking:</strong> Reps log daily sales; managers review and approve entries</li>
+                <li><strong>Audit Trail:</strong> Full history of all changes with timestamps and user attribution</li>
+                <li><strong>Excel Export:</strong> One-click download of team performance data for reporting</li>
+                <li><strong>Team Management:</strong> Admin can add/remove team members and assign roles</li>
+            </ul>
+            <h3>Technical Stack</h3>
+            <ul>
+                <li>Frontend: Vanilla JavaScript, HTML5, CSS3</li>
+                <li>Backend: Supabase (PostgreSQL) with Row-Level Security policies</li>
+                <li>Authentication: Supabase Auth with JWT tokens</li>
+                <li>Hosting: Netlify with continuous deployment from GitHub</li>
+                <li>Export: SheetJS library for Excel file generation</li>
+            </ul>
+            <h3>Business Impact</h3>
+            <ul>
+                <li>Replaced manual WhatsApp-based tracking with a structured digital system</li>
+                <li>Real-time visibility into individual and team performance</li>
+                <li>Reduced reporting time from hours to seconds with automated Excel export</li>
+                <li>Improved accountability through immutable audit trails</li>
+                <li>Scalable across multiple sales teams and regions</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- MODAL 4: Loan Default -->
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal4')">&times;</span>
+            <h2>Loan Default Prediction - Technical Details</h2>
+            <h3>Project Overview</h3>
+            <p>Machine learning model predicting loan default risk using ensemble techniques. Analyzes borrower characteristics, financial history, and loan attributes to provide probability scores.</p>
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>Feature Engineering:</strong> 50+ features including debt-to-income, credit utilization, payment history</li>
+                <li><strong>Ensemble Modeling:</strong> XGBoost, Random Forest, Logistic Regression with weighted voting</li>
+                <li><strong>Class Imbalance:</strong> SMOTE for synthetic minority oversampling</li>
+                <li><strong>Model Interpretability:</strong> SHAP values for feature importance</li>
+                <li><strong>Risk Segmentation:</strong> Low, Medium, High, Very High risk categorization</li>
+                <li><strong>Production Pipeline:</strong> Automated end-to-end prediction workflow</li>
+            </ul>
+            <h3>Model Performance</h3>
+            <ul>
+                <li>Accuracy: 87%</li>
+                <li>ROC-AUC Score: 0.91</li>
+                <li>Precision: 83%</li>
+                <li>Recall: 79%</li>
+                <li>Dataset: 250,000+ loan applications</li>
+            </ul>
+            <h3>Top Predictive Features</h3>
+            <ul>
+                <li><strong>Credit Score (FICO):</strong> 25% feature importance</li>
+                <li><strong>Debt-to-Income Ratio:</strong> 18% importance</li>
+                <li><strong>Employment Length:</strong> 12% importance</li>
+                <li><strong>Loan Amount:</strong> 10% importance</li>
+                <li><strong>Credit Inquiries:</strong> 8% importance</li>
+            </ul>
+            <h3>Business Impact</h3>
+            <ul>
+                <li>Identifies 79% of defaults, reducing bad debt exposure</li>
+                <li>Enables approval of creditworthy borderline applicants</li>
+                <li>Real-time predictions reduce processing time from days to minutes</li>
+                <li>Explainable AI ensures transparency and regulatory compliance</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- MODAL 5: Markowitz -->
+    <div id="modal5" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal5')">&times;</span>
+            <h2>Portfolio Optimization - Technical Details</h2>
+            <h3>Project Overview</h3>
+            <p>Interactive Shiny dashboard implementing Modern Portfolio Theory using quadratic programming for optimal asset allocation.</p>
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>Efficient Frontier:</strong> Visualization of risk-return tradeoffs</li>
+                <li><strong>Sharpe Ratio Optimization:</strong> Maximum risk-adjusted returns</li>
+                <li><strong>Minimum Variance Portfolio:</strong> Lowest-risk allocation</li>
+                <li><strong>Custom Constraints:</strong> Position limits, sector constraints, long/short</li>
+                <li><strong>Interactive Dashboard:</strong> Real-time portfolio adjustments</li>
+                <li><strong>Historical Backtesting:</strong> Performance validation</li>
+            </ul>
+            <h3>Results</h3>
+            <ul>
+                <li>15% annual outperformance vs equal-weight benchmark</li>
+                <li>25% reduction in portfolio volatility</li>
+                <li>Real-time Yahoo Finance data integration</li>
+                <li>Support for 20+ asset portfolios</li>
+            </ul>
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="container">
             <p>&copy; 2026 Doug Chingosho | MS Fintech Analytics, Washington University in St. Louis</p>
@@ -581,16 +507,13 @@ def black_scholes_price(S, K, T, r, sigma, option_type='call'):<br>
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>    <script>
+    <script>
         function openModal(modalId) {
             document.getElementById(modalId).style.display = "block";
         }
-
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = "none";
         }
-
-        // Close modal when clicking outside
         window.onclick = function(event) {
             const modals = document.getElementsByClassName('modal');
             for (let modal of modals) {
@@ -600,6 +523,5 @@ def black_scholes_price(S, K, T, r, sigma, option_type='call'):<br>
             }
         }
     </script>
-
 </body>
 </html>
