@@ -1,136 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About - Doug Chingosho</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Doug Chingosho</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav class="navbar">
-    <a href="https://dougchingosho.com/index.html" class="nav-brand">
-      <img src="logo.png" alt="DC Logo" class="nav-logo"> Doug Chingosho
-    </a>
-    <ul class="nav-links">
-      <li><a href="https://dougchingosho.com/index.html">Home</a></li>
-      <li><a href="https://dougchingosho.com/about.html" class="active">About</a></li>
-      <li><a href="https://dougchingosho.com/projects.html">Projects</a></li>
-      <li><a href="https://dougchingosho.com/contact.html">Contact</a></li>
-    </ul>
-  </nav>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="DC Logo" class="logo-img">
+                Doug Chingosho
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link active">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
-  <main class="page-content">
-    <div class="page-header">
-      <h1>About Me</h1>
-      <p>Master of Science in Financial Technology Analytics</p>
-    </div>
-
-    <section class="about-intro">
-      <h2>Hello! 👋</h2>
-      <p>I'm Doug Chingosho, a graduate student pursuing an MS in Business Analytics with a concentration in Financial Technology Analytics at Washington University in St. Louis, Olin Business School. I'm passionate about leveraging data science and quantitative analysis to solve complex financial problems and drive strategic decision-making.</p>
-      <p>With over 5 years of experience in financial services, I've developed a strong foundation in risk management, data administration, and team leadership. My journey from managing pension fund assets to pursuing advanced analytics reflects my commitment to continuous learning and excellence.</p>
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>About Me</h1>
+            <p>Master of Science in Financial Technology Analytics</p>
+        </div>
     </section>
 
-    <section class="what-drives">
-      <h2>What Drives Me</h2>
-      <div class="drives-grid">
-        <div class="drive-card">
-          <h3>🎯 Impact Through Data</h3>
-          <p>I believe data should tell stories that drive meaningful business decisions. Whether it's optimizing portfolio allocations or time series analysis (both predictive and prescriptive), I'm motivated by creating tangible value through analytics.</p>
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="container">
+            
+            <!-- Introduction -->
+            <div class="about-section">
+                <h2>Hello! 👋</h2>
+                <p class="intro-text">
+                    I'm Doug Chingosho, a graduate student pursuing an MS in Business Analytics 
+                    with a concentration in Financial Technology Analytics at Washington University in St. Louis, 
+                    Olin Business School. I'm passionate about leveraging data science and quantitative analysis 
+                    to solve complex financial problems and drive strategic decision-making.
+                </p>
+                <p>
+                    With over 5 years of experience in financial services, I've developed 
+                    a strong foundation in risk management, data administration, and team leadership. My journey 
+                    from managing pension fund assets to pursuing advanced analytics reflects my commitment to continuous learning and excellence.
+                </p>
+            </div>
+
+            <!-- What Drives Me -->
+            <div class="about-section">
+                <h2>What Drives Me</h2>
+                <div class="values-grid-full">
+                    <div class="value-card">
+                        <h3>🎯 Impact Through Data</h3>
+                        <p>
+                            I believe data should tell stories that drive meaningful business decisions. 
+                            Whether it's optimizing portfolio allocations, time series analysis (both predictive and prescriptive). 
+                            I'm motivated by creating tangible value through analytics.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <h3>🌱 Continuous Learning</h3>
+                        <p>
+                            "Tell me and I forget. Teach me and I remember. Involve me and I learn.", Benjamin Franklin 
+                            The beautiful thing about learning is that nobody can take it away from you. Growth also happens outside comfort zones.
+                            I actively pursue new skills and embrace challenging problems.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <h3>🤝 Collaboration & Team Work</h3>
+                        <p>
+                            "It is better to have a great team than a team of greats.", Simon Sinek. This explains why PSG failed to win UEFA Champions League with Lionel Messi, Neymar Junior and Mbappe, all in their prime. Teamwork, to me, is about 
+                            empowering each other to succeed.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <h3>🌍 Community Building</h3>
+                        <p>
+                            Community doesnt have to be a thousand people who live in a neighbourhood.
+                            “What you do makes a difference, and you have to decide what kind of difference you want to make.” Jane Goodall 
+                            The world is such a better place when we look out for each other because noone else will.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Expertise -->
+            <div class="about-section">
+                <h2>Technical Expertise</h2>
+                <div class="expertise-grid-full">
+                    
+                    <div class="expertise-category">
+                        <h3>📊 Data & Analytics</h3>
+                        <ul>
+                            <li><strong>Machine Learning:</strong> Supervised/unsupervised learning, XGBoost, Random Forest, Neural Networks</li>
+                            <li><strong>Statistical Modeling:</strong> Regression analysis, time series forecasting, Bayesian methods</li>
+                            <li><strong>Data Visualization:</strong> Tableau, Power BI, ggplot2, matplotlib, Plotly</li>
+                            <li><strong>Big Data:</strong> SQL, data warehousing, ETL pipelines</li>
+                        </ul>
+                    </div>
+
+                    <div class="expertise-category">
+                        <h3>💰 Financial Analytics</h3>
+                        <ul>
+                            <li><strong>Portfolio Management:</strong> Markowitz optimization, CAPM, Fama-French models</li>
+                            <li><strong>Derivatives Pricing:</strong> Black-Scholes, Greeks, Monte Carlo simulation</li>
+                            <li><strong>Risk Management:</strong> VaR, stress testing, credit risk modeling</li>
+                            <li><strong>Financial Modeling:</strong> DCF, APV, scenario analysis</li>
+                        </ul>
+                    </div>
+
+                    <div class="expertise-category">
+                        <h3>💻 Programming & Tools</h3>
+                        <ul>
+                            <li><strong>Languages:</strong> Python (NumPy, Pandas, scikit-learn), R (tidyverse, caret), SQL</li>
+                            <li><strong>Visualization:</strong> Tableau, Power BI, Excel (VBA, Power Query)</li>
+                            <li><strong>Other Tools:</strong> Git/GitHub, Jupyter, RStudio, VS Code, Streamlit</li>
+                            <li><strong>Cloud:</strong> Basic AWS, Google Cloud Platform experience</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Personal Interests -->
+            <div class="about-section">
+                <h2>Beyond Analytics</h2>
+                <p>
+                    Beyond all this, when I'm not crunching numbers and stuff, some of my interests are:
+                </p>
+                <ul class="interests-list">
+                    <li>🥾 <strong>Hiking, Zip Lining, Bungee Jumping and Travelling:</strong> Exploring trails and enjoying nature.</li>
+                    <li>⚽ <strong>Soccer, Baseball & Cricket:</strong> Favorites are |⚽Chelsea F.C |⚾Go Cardinals !🏏Chevrons</li>
+                    <li>🏎️ <strong>Formula 1 and 🏀 NBA:</strong> Sometimes I watch weekend games and races.</li>
+                    <li>🎮 <strong>Playing Sports:</strong> I enjoy playing Soccer, Volleyball, Badminton and Pickleball</li>
+                    <li>🎬 <strong>Movies:</strong> Intelligence & Crime movies or tv shows, sometimes epic historical films like G.o.T. or Troy</li>
+                </ul>
+            </div>
+
+            <!-- Campus Involvement -->
+            <div class="about-section">
+                <h2>Campus Involvement</h2>
+                <div class="involvement-grid">
+                    <div class="involvement-card">
+                        <h4>Beta Alpha Psi</h4>
+                        <p>An international honor society for accounting, finance and information systems students attending universities</p>
+                    </div>
+                    <div class="involvement-card">
+                        <h4>Olin Africa Business Club</h4>
+                        <p>Promoting African business perspectives and networking</p>
+                    </div>
+                    <div class="involvement-card">
+                        <h4>Olin Graduate & Professional Student Council</h4>
+                        <p>Representing graduate students interests</p>
+                    </div>
+                    <div class="involvement-card">
+                        <h4>SMP Student Ambassador</h4>
+                        <p>Supporting and mentoring incoming students</p>
+                    </div>
+                    <div class="involvement-card">
+                        <h4>Varsity Event Staff</h4>
+                        <p>Assist with planning and coordination of university athletic events</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Languages -->
+            <div class="about-section">
+                <h2>Languages</h2>
+                <div class="languages">
+                    <div class="language-item">
+                        <strong>English:</strong> <span class="language-level">Fluent (Professional Working Proficiency)</span>
+                    </div>
+                    <div class="language-item">
+                        <strong>Shona:</strong> <span class="language-level">Native Speaker</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="cta-section">
+                <h2>Let's Connect!</h2>
+                <p>
+                    I'm always interested in discussing finance, data analytics, fintech opportunities, or just 
+                    connecting with fellow professionals. Feel free to reach out!
+                </p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+                    <a href="projects.html" class="btn btn-secondary">View My Work</a>
+                </div>
+            </div>
+
         </div>
-        <div class="drive-card">
-          <h3>🌱 Continuous Learning</h3>
-          <p>"Tell me and I forget. Teach me and I remember. Involve me and I learn." — Benjamin Franklin. The beautiful thing about learning is that nobody can take it away from you. Growth also happens outside comfort zones.</p>
-        </div>
-        <div class="drive-card">
-          <h3>🤝 Collaboration &amp; Team Work</h3>
-          <p>"It is better to have a great team than a team of greats." — Simon Sinek. This explains why PSG failed to win UEFA Champions League with Messi, Neymar and Mbappe all in their prime. Teamwork is about empowering each other to succeed.</p>
-        </div>
-        <div class="drive-card">
-          <h3>🌍 Community Building</h3>
-          <p>"What you do makes a difference, and you have to decide what kind of difference you want to make." — Jane Goodall. The world is a better place when we look out for each other.</p>
-        </div>
-      </div>
     </section>
 
-    <section class="expertise">
-      <h2>Technical Expertise</h2>
-      <div class="expertise-grid">
-        <div class="expertise-card">
-          <h3>📊 Data &amp; Analytics</h3>
-          <ul>
-            <li><strong>Machine Learning:</strong> Supervised/unsupervised learning, XGBoost, Random Forest, Neural Networks</li>
-            <li><strong>Statistical Modeling:</strong> Regression analysis, time series forecasting, Bayesian methods</li>
-            <li><strong>Data Visualization:</strong> Tableau, Power BI, ggplot2, matplotlib, Plotly</li>
-            <li><strong>Big Data:</strong> SQL, data warehousing, ETL pipelines</li>
-          </ul>
-        </div>
-        <div class="expertise-card">
-          <h3>💰 Financial Analytics</h3>
-          <ul>
-            <li><strong>Portfolio Management:</strong> Markowitz optimization, CAPM, Fama-French models</li>
-            <li><strong>Derivatives Pricing:</strong> Black-Scholes, Greeks, Monte Carlo simulation</li>
-            <li><strong>Risk Management:</strong> VaR, stress testing, credit risk modeling</li>
-            <li><strong>Financial Modeling:</strong> DCF, APV, scenario analysis</li>
-          </ul>
-        </div>
-        <div class="expertise-card">
-          <h3>💻 Programming &amp; Tools</h3>
-          <ul>
-            <li><strong>Languages:</strong> Python (NumPy, Pandas, scikit-learn), R (tidyverse, caret), SQL</li>
-            <li><strong>Visualization:</strong> Tableau, Power BI, Excel (VBA, Power Query)</li>
-            <li><strong>Other Tools:</strong> Git/GitHub, Jupyter, RStudio, VS Code, Streamlit</li>
-            <li><strong>Cloud:</strong> Basic AWS, Google Cloud Platform experience</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="beyond">
-      <h2>Beyond Analytics</h2>
-      <ul class="interests">
-        <li>🥾 <strong>Hiking, Zip Lining, Bungee Jumping &amp; Travelling:</strong> Exploring trails and enjoying nature.</li>
-        <li>⚽ <strong>Soccer, Baseball &amp; Cricket:</strong> Favourites: ⚽ Chelsea F.C | ⚾ Go Cardinals! 🏏 Chevrons</li>
-        <li>🏎️ <strong>Formula 1 and 🏀 NBA:</strong> Weekend games and races.</li>
-        <li>🎮 <strong>Playing Sports:</strong> Soccer, Volleyball, Badminton and Pickleball</li>
-        <li>🎬 <strong>Movies:</strong> Intelligence &amp; Crime movies/TV shows, epic historical films like G.o.T. or Troy</li>
-      </ul>
-    </section>
-
-    <section class="involvement">
-      <h2>Campus Involvement</h2>
-      <div class="involvement-grid">
-        <div class="involvement-card"><h4>Beta Alpha Psi</h4><p>International honor society for accounting, finance and information systems students</p></div>
-        <div class="involvement-card"><h4>Olin Africa Business Club</h4><p>Promoting African business perspectives and networking</p></div>
-        <div class="involvement-card"><h4>Olin Graduate &amp; Professional Student Council</h4><p>Representing graduate students' interests</p></div>
-        <div class="involvement-card"><h4>SMP Student Ambassador</h4><p>Supporting and mentoring incoming students</p></div>
-        <div class="involvement-card"><h4>Varsity Event Staff</h4><p>Assist with planning and coordination of university athletic events</p></div>
-      </div>
-    </section>
-
-    <section class="languages">
-      <h2>Languages</h2>
-      <p><strong>English:</strong> Fluent (Professional Working Proficiency)</p>
-      <p><strong>Shona:</strong> Native Speaker</p>
-    </section>
-
-    <section class="connect-cta">
-      <h2>Let's Connect!</h2>
-      <p>I'm always interested in discussing finance, data analytics, fintech opportunities, or just connecting with fellow professionals. Feel free to reach out!</p>
-      <div class="cta-btns">
-        <a href="https://dougchingosho.com/contact.html" class="btn btn-primary">Get in Touch</a>
-        <a href="https://dougchingosho.com/projects.html" class="btn btn-secondary">View My Work</a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2026 Doug Chingosho | MS Fintech Analytics, Washington University in St. Louis</p>
-    <div class="footer-links">
-      <a href="https://linkedin.com/in/douglas-tawanda-chingosho" target="_blank">LinkedIn</a>
-      <a href="https://github.com/doug1192" target="_blank">GitHub</a>
-      <a href="mailto:douglasc@wustl.edu">Email</a>
-    </div>
-  </footer>
-</body>
-</html>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Doug Chingosho | MS Fintech Analytics, Washington University in St. Louis</p>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/douglas-tawanda-chingosho" target="_blank">LinkedIn</a>
+                <a href="https://github.com/doug1192" target="_blank">GitHub</a>
+                <a href="mailto:douglasc@wustl.edu">Email</a>
+            </div>
+     
