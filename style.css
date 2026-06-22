@@ -75,10 +75,12 @@ a:hover {
 }
 
 .logo-img {
-    height: 50px;
+    height: 46px;
     width: auto;
-    border-radius: 4px;
+    border-radius: 0;
     margin-right: 5px;
+    object-fit: cover;
+    display: block;
 }
 
 .hero-logo {
@@ -124,7 +126,7 @@ a:hover {
 .hero {
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
     color: white;
-    padding: 70px 20px;
+    padding: 50px 20px;
     text-align: center;
     position: relative;
 }
@@ -141,7 +143,7 @@ a:hover {
 }
 
 .hero-content {
-    max-width: 900px;
+    max-width: 680px;
     margin: 0 auto;
     position: relative;
     z-index: 2;
