@@ -1,0 +1,16 @@
+name: Keep Streamlit Apps Awake
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # every 6 hours — well under 12hr sleep threshold
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping BSM Options Pricer
+        run: curl -s https://doug-bsm-pricer.streamlit.app/ > /dev/null
+
+      - name: Ping Credit Risk Dashboard
+        run: curl -s https://doug-credit-risk-default-prediction.streamlit.app/ > /dev/null
+
+      - name: Ping Fraud Detection
+        run: curl -s https://your-fraud-app.streamlit.app/ > /dev/null
