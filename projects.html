@@ -168,9 +168,118 @@
         .code-block { background: #1a1a1a; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 20px 0; border: 1px solid #333; }
         .code-block code { color: #e0e0e0; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.5; }
         @media (max-width: 900px) { .projects-container { grid-template-columns: 1fr; } }
+        /* ── project-number color preserved ── */
+        .project-number { color: #2196f3; }
+
+        /* ── Fullscreen App Overlay ── */
+        .app-overlay {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: #0d0d0d;
+            flex-direction: column;
+        }
+        .app-overlay.open { display: flex; }
+        .overlay-toolbar {
+            background: #212121;
+            border-bottom: 2px solid #2196f3;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            height: 52px;
+        }
+        .overlay-title {
+            color: #64b5f6;
+            font-weight: 600;
+            font-size: 0.95rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .overlay-actions { display: flex; align-items: center; gap: 16px; }
+        .overlay-newtab {
+            color: #b0b0b0; font-size: 0.85rem; text-decoration: underline;
+            cursor: pointer; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: none; border: none;
+        }
+        .overlay-newtab:hover { color: #64b5f6; }
+        .overlay-close {
+            background: #333; border: none; color: #e0e0e0;
+            font-size: 0.95rem; cursor: pointer; padding: 6px 14px;
+            border-radius: 5px; transition: background 0.2s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 600;
+        }
+        .overlay-close:hover { background: #ff5252; color: white; }
+        .overlay-frame { flex: 1; width: 100%; border: none; display: block; }
+        .overlay-tableau-wrap {
+            flex: 1; width: 100%; overflow: auto;
+            background: white; display: flex;
+            align-items: flex-start; justify-content: center;
+        }
+        .overlay-tableau-wrap iframe {
+            width: 100%; border: none;
+            min-height: calc(100vh - 52px);
+        }
+
     </style>
 </head>
 <body>
+
+    <!-- ══ FULLSCREEN APP OVERLAYS ══ -->
+
+    <!-- Overlay 1: BSM -->
+    <div id="overlay1" class="app-overlay">
+        <div class="overlay-toolbar">
+            <span class="overlay-title">🚀 Black-Scholes Options Pricer</span>
+            <div class="overlay-actions">
+                <a href="https://doug-bsm-pricer.streamlit.app/" target="_blank" class="overlay-newtab">Open in new tab ↗</a>
+                <button class="overlay-close" onclick="closeOverlay('overlay1')">✕ Close</button>
+            </div>
+        </div>
+        <iframe id="frame1" class="overlay-frame" src="" title="BSM Options Pricer" allowfullscreen></iframe>
+    </div>
+
+    <!-- Overlay 2: Tableau -->
+    <div id="overlay2" class="app-overlay">
+        <div class="overlay-toolbar">
+            <span class="overlay-title">📊 Global Superstore Dashboard</span>
+            <div class="overlay-actions">
+                <a href="https://public.tableau.com/app/profile/douglas.chingosho/viz/GlobalSuperstoreDashboard_17748403379780/1e-Dashboard" target="_blank" class="overlay-newtab">Open in new tab ↗</a>
+                <button class="overlay-close" onclick="closeOverlay('overlay2')">✕ Close</button>
+            </div>
+        </div>
+        <div class="overlay-tableau-wrap">
+            <iframe id="frame2" src="" title="Tableau Dashboard" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Overlay 3: Juicee!! -->
+    <div id="overlay3" class="app-overlay">
+        <div class="overlay-toolbar">
+            <span class="overlay-title">🚀 Juicee!! Sales Tracking App</span>
+            <div class="overlay-actions">
+                <a href="https://juicee10.netlify.app/" target="_blank" class="overlay-newtab">Open in new tab ↗</a>
+                <button class="overlay-close" onclick="closeOverlay('overlay3')">✕ Close</button>
+            </div>
+        </div>
+        <iframe id="frame3" class="overlay-frame" src="" title="Juicee Sales App" allowfullscreen></iframe>
+    </div>
+
+    <!-- Overlay 4: Loan Default -->
+    <div id="overlay4" class="app-overlay">
+        <div class="overlay-toolbar">
+            <span class="overlay-title">🚀 Loan Default Prediction Model</span>
+            <div class="overlay-actions">
+                <a href="https://doug-credit-risk-default-prediction.streamlit.app/" target="_blank" class="overlay-newtab">Open in new tab ↗</a>
+                <button class="overlay-close" onclick="closeOverlay('overlay4')">✕ Close</button>
+            </div>
+        </div>
+        <iframe id="frame4" class="overlay-frame" src="" title="Loan Default Prediction" allowfullscreen></iframe>
+    </div>
+
     <nav class="navbar">
         <div class="nav-container">
             <a href="https://dougchingosho.com" class="nav-logo"><img src="logo.png" alt="DC Logo" class="logo-img">Doug Chingosho</a>
@@ -212,7 +321,7 @@
                     <div class="metric-item"><strong>Simulation:</strong> 10,000+ paths</div>
                 </div>
                 <div class="project-buttons">
-                    <a href="https://doug-bsm-pricer.streamlit.app/" class="btn-app" target="_blank">🚀 Launch App</a>
+                    <button class="btn-app" onclick="openOverlay('overlay1','frame1','https://doug-bsm-pricer.streamlit.app/?embed=true')">🚀 Launch App</button>
                     <button class="btn-details" onclick="openModal('modal1')">📋 View Details</button>
                 </div>
             </div>
@@ -236,7 +345,7 @@
                     <div class="metric-item"><strong>Interactivity:</strong> Filters and parameters</div>
                 </div>
                 <div class="project-buttons">
-                    <a href="https://public.tableau.com/app/profile/douglas.chingosho/vizzes" class="btn-app" target="_blank">📊 View Dashboard</a>
+                    <button class="btn-app" onclick="openOverlay('overlay2','frame2','https://public.tableau.com/views/GlobalSuperstoreDashboard_17748403379780/1e-Dashboard?:showVizHome=no&:embed=true')">📊 View Dashboard</button>
                     <button class="btn-details" onclick="openModal('modal2')">📋 View Details</button>
                 </div>
             </div>
@@ -262,7 +371,7 @@
                     <div class="metric-item"><strong>Access:</strong> Role-based (Admin / Manager / Rep)</div>
                 </div>
                 <div class="project-buttons">
-                    <a href="https://juicee10.netlify.app/" class="btn-app" target="_blank">🚀 Launch App</a>
+                    <button class="btn-app" onclick="openOverlay('overlay3','frame3','https://juicee10.netlify.app/')">🚀 Launch App</button>
                     <button class="btn-details" onclick="openModal('modal3')">📋 View Details</button>
                 </div>
             </div>
@@ -286,7 +395,7 @@
                     <div class="metric-item"><strong>Precision:</strong> 83% | <strong>Recall:</strong> 79%</div>
                 </div>
                 <div class="project-buttons">
-                    <a href="https://doug-credit-risk-default-prediction.streamlit.app/" class="btn-app" target="_blank">🚀 Launch App</a>
+                    <button class="btn-app" onclick="openOverlay('overlay4','frame4','https://doug-credit-risk-default-prediction.streamlit.app/?embed=true')">🚀 Launch App</button>
                     <button class="btn-details" onclick="openModal('modal4')">📋 View Details</button>
                 </div>
             </div>
@@ -508,6 +617,30 @@ def black_scholes_price(S, K, T, r, sigma, option_type='call'):<br>
     </footer>
 
     <script>
+        // ── Fullscreen overlay ──
+        function openOverlay(overlayId, frameId, url) {
+            document.getElementById(frameId).src = url;
+            document.getElementById(overlayId).classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeOverlay(overlayId) {
+            var frameId = overlayId.replace('overlay', 'frame');
+            document.getElementById(frameId).src = '';
+            document.getElementById(overlayId).classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.app-overlay.open').forEach(function(o) {
+                    var frameId = o.id.replace('overlay', 'frame');
+                    document.getElementById(frameId).src = '';
+                    o.classList.remove('open');
+                    document.body.style.overflow = '';
+                });
+            }
+        });
+
+        // ── Detail modals ──
         function openModal(modalId) {
             document.getElementById(modalId).style.display = "block";
         }
