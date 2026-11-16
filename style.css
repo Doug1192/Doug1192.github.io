@@ -1,5 +1,93 @@
 /* ============================================
-   GLOBAL STYLES - DARK THEME
+   THEME TOKENS
+   Light = default. Dark overrides via system
+   preference (prefers-color-scheme) or manual
+   toggle (data-theme attribute, saved to
+   localStorage by the inline script in <head>).
+   ============================================ */
+
+:root {
+    --bg-primary: #f5f7fa;
+    --bg-secondary: #eceff3;
+    --bg-tertiary: #e4e8ee;
+    --bg-nav: #ffffff;
+    --bg-code: #0f1115;
+
+    --text-primary: #1a1f29;
+    --text-secondary: #5b6472;
+    --text-on-accent: #ffffff;
+
+    --accent: #a3395c;
+    --accent-hover: #872e4b;
+    --accent-soft: #f7ebef;
+
+    --border: #dde1e7;
+    --card-bg: #ffffff;
+    --shadow: rgba(15, 23, 42, 0.08);
+    --shadow-strong: rgba(15, 23, 42, 0.14);
+
+    --success-bg: #e8f8ee;
+    --success-text: #1b7a43;
+    --error-bg: #fdecec;
+    --error-text: #b3261e;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg-primary: #121418;
+        --bg-secondary: #181b20;
+        --bg-tertiary: #1f232a;
+        --bg-nav: #15171b;
+        --bg-code: #0a0b0d;
+
+        --text-primary: #eef1f5;
+        --text-secondary: #9aa3af;
+        --text-on-accent: #ffffff;
+
+        --accent: #bd4e6d;
+        --accent-hover: #c96c87;
+        --accent-soft: #2e1620;
+
+        --border: #2a2e35;
+        --card-bg: #181b20;
+        --shadow: rgba(0, 0, 0, 0.35);
+        --shadow-strong: rgba(0, 0, 0, 0.5);
+
+        --success-bg: #113322;
+        --success-text: #7fd9a0;
+        --error-bg: #3a1414;
+        --error-text: #ff8a80;
+    }
+}
+
+:root[data-theme="dark"] {
+    --bg-primary: #121418;
+    --bg-secondary: #181b20;
+    --bg-tertiary: #1f232a;
+    --bg-nav: #15171b;
+    --bg-code: #0a0b0d;
+
+    --text-primary: #eef1f5;
+    --text-secondary: #9aa3af;
+    --text-on-accent: #ffffff;
+
+    --accent: #bd4e6d;
+    --accent-hover: #c96c87;
+    --accent-soft: #2e1620;
+
+    --border: #2a2e35;
+    --card-bg: #181b20;
+    --shadow: rgba(0, 0, 0, 0.35);
+    --shadow-strong: rgba(0, 0, 0, 0.5);
+
+    --success-bg: #113322;
+    --success-text: #7fd9a0;
+    --error-bg: #3a1414;
+    --error-text: #ff8a80;
+}
+
+/* ============================================
+   GLOBAL STYLES
    ============================================ */
 
 * {
@@ -8,11 +96,16 @@
     box-sizing: border-box;
 }
 
+html {
+    color-scheme: light dark;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: #e0e0e0;
-    background-color: #1a1a1a;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .container {
@@ -22,18 +115,18 @@ body {
 }
 
 h1, h2, h3, h4 {
-    color: #ffffff;
+    color: var(--text-primary);
     margin-bottom: 15px;
 }
 
 a {
     text-decoration: none;
-    color: #64b5f6;
+    color: var(--accent);
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #90caf9;
+    color: var(--accent-hover);
 }
 
 /* ============================================
@@ -41,14 +134,14 @@ a:hover {
    ============================================ */
 
 .navbar {
-    background: #212121;
-    color: white;
+    background: var(--bg-nav);
     padding: 18px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    border-bottom: 1px solid #333;
+    box-shadow: 0 2px 10px var(--shadow);
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .nav-container {
@@ -58,12 +151,13 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
 }
 
 .nav-logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: white;
+    color: var(--text-primary);
     transition: color 0.3s ease;
     display: flex;
     align-items: center;
@@ -71,7 +165,7 @@ a:hover {
 }
 
 .nav-logo:hover {
-    color: #64b5f6;
+    color: var(--accent);
 }
 
 .logo-img {
@@ -91,12 +185,18 @@ a:hover {
 .hero-logo-img {
     height: 90px;
     width: auto;
-    filter: drop-shadow(0 4px 10px rgba(33, 150, 243, 0.3));
+    filter: drop-shadow(0 4px 10px var(--shadow-strong));
     transition: transform 0.3s ease;
 }
 
 .hero-logo-img:hover {
     transform: scale(1.05);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
 }
 
 .nav-menu {
@@ -106,7 +206,7 @@ a:hover {
 }
 
 .nav-link {
-    color: #b0b0b0;
+    color: var(--text-secondary);
     font-weight: 500;
     padding: 8px 15px;
     border-radius: 6px;
@@ -115,31 +215,97 @@ a:hover {
 
 .nav-link:hover,
 .nav-link.active {
-    background: #2a2a2a;
-    color: #64b5f6;
+    background: var(--bg-tertiary);
+    color: var(--accent);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
 }
 
 /* ============================================
    HERO SECTION
+   Neutral background, one accent color, dark text.
    ============================================ */
 
 .hero {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
-    color: white;
-    padding: 50px 20px;
+    /* Two vector backgrounds that cross-fade into each other (home page only).
+       Each slide includes a soft dark vignette behind the text so it stays
+       readable in both light and dark mode. */
+    background-color: #12141a;
+    color: #eef1f5;
+    padding: 70px 20px;
     text-align: center;
     position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+}
+
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    animation: heroFade 16s ease-in-out infinite;
 }
 
 .hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.2);
-    z-index: 1;
+    background:
+        radial-gradient(ellipse 52% 85% at 50% 52%, rgba(16, 14, 20, 0.93) 0%, rgba(16, 14, 20, 0.86) 45%, rgba(16, 14, 20, 0) 100%),
+        url("hero-bg.svg") center / cover no-repeat;
+}
+
+.hero::after {
+    background:
+        radial-gradient(ellipse 52% 85% at 50% 52%, rgba(16, 14, 20, 0.93) 0%, rgba(16, 14, 20, 0.86) 45%, rgba(16, 14, 20, 0) 100%),
+        url("hero-bg-2.svg") center / cover no-repeat;
+    animation-delay: -8s;
+}
+
+@keyframes heroFade {
+    0%, 40%  { opacity: 1; }
+    50%, 90% { opacity: 0; }
+    100%     { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero::before, .hero::after { animation: none; }
+    .hero::after { opacity: 0; }
+}
+
+/* Hero text is always light because the hero is always dark */
+.hero .hero-subtitle { color: #e58aa6; }
+.hero .hero-description { color: #d7dbe2; }
+.hero .hero-subtext { color: #c5cbd5; }
+.hero .btn-secondary {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.7);
+}
+.hero .btn-secondary:hover {
+    background: #ffffff;
+    color: #1a1f29;
+    border-color: #ffffff;
 }
 
 .hero-content {
@@ -152,27 +318,27 @@ a:hover {
 .hero-title {
     font-size: 2.8rem;
     margin-bottom: 15px;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    color: var(--text-primary);
 }
 
 .hero-subtitle {
     font-size: 1.6rem;
     margin-bottom: 20px;
-    color: #e3f2fd;
+    color: var(--accent);
+    font-weight: 600;
 }
 
 .hero-description {
     font-size: 1.15rem;
     margin-bottom: 20px;
-    color: #e3f2fd;
+    color: var(--text-secondary);
     line-height: 1.8;
 }
 
 .hero-subtext {
     font-size: 1.05rem;
     margin-bottom: 35px;
-    color: #bbdefb;
+    color: var(--text-secondary);
     line-height: 1.7;
     max-width: 750px;
     margin-left: auto;
@@ -207,25 +373,26 @@ a:hover {
 }
 
 .btn-primary {
-    background: #2196f3;
-    color: white;
+    background: var(--accent);
+    color: var(--text-on-accent);
 }
 
 .btn-primary:hover {
-    background: #1976d2;
+    background: var(--accent-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+    box-shadow: 0 6px 20px var(--shadow-strong);
+    color: var(--text-on-accent);
 }
 
 .btn-secondary {
     background: transparent;
-    color: #64b5f6;
-    border: 2px solid #64b5f6;
+    color: var(--accent);
+    border: 2px solid var(--accent);
 }
 
 .btn-secondary:hover {
-    background: #64b5f6;
-    color: #1a1a1a;
+    background: var(--accent);
+    color: var(--text-on-accent);
     transform: translateY(-2px);
 }
 
@@ -235,14 +402,14 @@ a:hover {
 
 .skills-preview {
     padding: 80px 20px;
-    background: #212121;
+    background: var(--bg-secondary);
 }
 
 .section-title {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 60px;
-    color: #ffffff;
+    color: var(--text-primary);
 }
 
 .skills-grid {
@@ -254,24 +421,24 @@ a:hover {
 }
 
 .skill-category {
-    background: #2a2a2a;
+    background: var(--card-bg);
     padding: 35px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    border: 1px solid #333;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px var(--shadow);
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .skill-category:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(33, 150, 243, 0.2);
-    border-color: #2196f3;
+    box-shadow: 0 8px 25px var(--shadow-strong);
+    border-color: var(--accent);
 }
 
 .skill-category h3 {
     font-size: 1.4rem;
     margin-bottom: 25px;
-    color: #64b5f6;
+    color: var(--accent);
 }
 
 .skills-tags {
@@ -281,8 +448,8 @@ a:hover {
 }
 
 .skill-tag {
-    background: #1976d2;
-    color: white;
+    background: var(--accent);
+    color: var(--text-on-accent);
     padding: 8px 18px;
     border-radius: 25px;
     font-size: 0.9rem;
@@ -291,7 +458,7 @@ a:hover {
 }
 
 .skill-tag:hover {
-    background: #2196f3;
+    background: var(--accent-hover);
     transform: scale(1.05);
 }
 
@@ -301,7 +468,7 @@ a:hover {
 
 .featured-projects {
     padding: 80px 20px;
-    background: #1a1a1a;
+    background: var(--bg-primary);
 }
 
 .projects-grid {
@@ -312,8 +479,8 @@ a:hover {
 }
 
 .project-card {
-    background: #2a2a2a;
-    border: 1px solid #333;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 30px;
     transition: all 0.3s ease;
@@ -321,8 +488,8 @@ a:hover {
 
 .project-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(33, 150, 243, 0.2);
-    border-color: #2196f3;
+    box-shadow: 0 12px 30px var(--shadow-strong);
+    border-color: var(--accent);
 }
 
 .project-header {
@@ -331,13 +498,13 @@ a:hover {
 
 .project-header h3 {
     font-size: 1.4rem;
-    color: #ffffff;
+    color: var(--text-primary);
     margin-bottom: 10px;
 }
 
 .project-tag {
-    background: #1976d2;
-    color: white;
+    background: var(--accent);
+    color: var(--text-on-accent);
     padding: 6px 14px;
     border-radius: 6px;
     font-size: 0.85rem;
@@ -346,7 +513,7 @@ a:hover {
 }
 
 .project-description {
-    color: #b0b0b0;
+    color: var(--text-secondary);
     margin-bottom: 25px;
     line-height: 1.7;
     font-size: 1rem;
@@ -363,21 +530,22 @@ a:hover {
    ============================================ */
 
 .page-header {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
-    color: white;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--accent-soft) 100%);
+    color: var(--text-primary);
     padding: 70px 20px;
     text-align: center;
+    border-bottom: 1px solid var(--border);
 }
 
 .page-header h1 {
     font-size: 2.8rem;
-    color: white;
+    color: var(--text-primary);
     margin-bottom: 15px;
 }
 
 .page-header p {
     font-size: 1.3rem;
-    color: #e3f2fd;
+    color: var(--text-secondary);
 }
 
 /* ============================================
@@ -386,7 +554,7 @@ a:hover {
 
 .about-content {
     padding: 70px 20px;
-    background: #1a1a1a;
+    background: var(--bg-primary);
 }
 
 .about-section {
@@ -397,12 +565,12 @@ a:hover {
 .intro-text {
     font-size: 1.2rem;
     line-height: 1.9;
-    color: #e0e0e0;
+    color: var(--text-primary);
     margin-bottom: 25px;
 }
 
 .timeline {
-    border-left: 3px solid #2196f3;
+    border-left: 3px solid var(--accent);
     padding-left: 35px;
     margin-top: 35px;
 }
@@ -415,22 +583,22 @@ a:hover {
 .timeline-marker {
     width: 16px;
     height: 16px;
-    background: #2196f3;
+    background: var(--accent);
     border-radius: 50%;
     position: absolute;
     left: -42px;
     top: 6px;
-    box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+    box-shadow: 0 0 10px var(--shadow-strong);
 }
 
 .timeline-content h3 {
-    color: #64b5f6;
+    color: var(--accent);
     margin-bottom: 12px;
     font-size: 1.3rem;
 }
 
 .timeline-content p {
-    color: #b0b0b0;
+    color: var(--text-secondary);
     line-height: 1.7;
 }
 
@@ -442,26 +610,29 @@ a:hover {
 }
 
 .value-card {
-    background: #2a2a2a;
+    background: var(--card-bg);
     padding: 30px;
     border-radius: 12px;
-    border-left: 4px solid #2196f3;
+    border-left: 4px solid var(--accent);
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
     transition: transform 0.3s ease;
 }
 
 .value-card:hover {
     transform: translateX(5px);
-    box-shadow: 0 4px 20px rgba(33, 150, 243, 0.2);
+    box-shadow: 0 4px 20px var(--shadow);
 }
 
 .value-card h3 {
     font-size: 1.15rem;
     margin-bottom: 15px;
-    color: #64b5f6;
+    color: var(--accent);
 }
 
 .value-card p {
-    color: #b0b0b0;
+    color: var(--text-secondary);
     line-height: 1.7;
 }
 
@@ -473,16 +644,16 @@ a:hover {
 }
 
 .expertise-category {
-    background: #2a2a2a;
+    background: var(--card-bg);
     padding: 30px;
     border-radius: 12px;
-    border: 1px solid #333;
+    border: 1px solid var(--border);
 }
 
 .expertise-category h3 {
     font-size: 1.3rem;
     margin-bottom: 20px;
-    color: #64b5f6;
+    color: var(--accent);
 }
 
 .expertise-category ul {
@@ -493,7 +664,7 @@ a:hover {
     padding: 10px 0;
     padding-left: 30px;
     position: relative;
-    color: #b0b0b0;
+    color: var(--text-secondary);
     line-height: 1.6;
 }
 
@@ -501,13 +672,13 @@ a:hover {
     content: "▸";
     position: absolute;
     left: 0;
-    color: #2196f3;
+    color: var(--accent);
     font-weight: bold;
     font-size: 1.2rem;
 }
 
 .expertise-category strong {
-    color: #e0e0e0;
+    color: var(--text-primary);
 }
 
 .certifications-grid {
@@ -518,21 +689,21 @@ a:hover {
 }
 
 .cert-card {
-    background: #2a2a2a;
+    background: var(--card-bg);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    border: 1px solid #333;
+    border: 1px solid var(--border);
     transition: border-color 0.3s ease;
 }
 
 .cert-card:hover {
-    border-color: #2196f3;
+    border-color: var(--accent);
 }
 
 .cert-card h4 {
     font-size: 0.95rem;
-    color: #e0e0e0;
+    color: var(--text-primary);
 }
 
 .interests-list {
@@ -543,7 +714,7 @@ a:hover {
 .interests-list li {
     padding: 12px 0;
     font-size: 1.05rem;
-    color: #b0b0b0;
+    color: var(--text-secondary);
 }
 
 .involvement-grid {
@@ -554,20 +725,23 @@ a:hover {
 }
 
 .involvement-card {
-    background: #2a2a2a;
+    background: var(--card-bg);
     padding: 25px;
     border-radius: 10px;
-    border-left: 3px solid #2196f3;
+    border-left: 3px solid var(--accent);
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
 
 .involvement-card h4 {
-    color: #64b5f6;
+    color: var(--accent);
     margin-bottom: 10px;
     font-size: 1.1rem;
 }
 
 .involvement-card p {
-    color: #b0b0b0;
+    color: var(--text-secondary);
     line-height: 1.6;
 }
 
@@ -578,18 +752,18 @@ a:hover {
 .language-item {
     padding: 15px 0;
     font-size: 1.05rem;
-    color: #e0e0e0;
+    color: var(--text-primary);
 }
 
 .language-level {
-    color: #b0b0b0;
+    color: var(--text-secondary);
 }
 
 .cta-section {
-    background: #212121;
+    background: var(--bg-secondary);
     padding: 70px 20px;
     text-align: center;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--border);
 }
 
 .cta-section h2 {
@@ -598,7 +772,7 @@ a:hover {
 }
 
 .cta-section p {
-    color: #b0b0b0;
+    color: var(--text-secondary);
     font-size: 1.1rem;
     max-width: 650px;
     margin: 0 auto 30px auto;
@@ -618,7 +792,7 @@ a:hover {
 
 .contact-section {
     padding: 70px 20px;
-    background: #1a1a1a;
+    background: var(--bg-primary);
 }
 
 .contact-grid {
@@ -633,30 +807,33 @@ a:hover {
 .contact-form-container h2 {
     font-size: 2rem;
     margin-bottom: 30px;
-    color: #ffffff;
+    color: var(--text-primary);
 }
 
 .contact-item {
     margin-bottom: 30px;
     padding: 25px;
-    background: #2a2a2a;
+    background: var(--card-bg);
     border-radius: 10px;
-    border-left: 4px solid #2196f3;
+    border-left: 4px solid var(--accent);
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
 
 .contact-item h3 {
     font-size: 1.15rem;
-    color: #64b5f6;
+    color: var(--accent);
     margin-bottom: 10px;
 }
 
 .contact-item p {
-    color: #b0b0b0;
+    color: var(--text-secondary);
     font-size: 1.05rem;
 }
 
 .contact-item a {
-    color: #64b5f6;
+    color: var(--accent);
     font-weight: 500;
 }
 
@@ -671,26 +848,26 @@ a:hover {
     max-width: 950px;
     margin: 0 auto;
     padding: 45px;
-    background: #212121;
+    background: var(--bg-secondary);
     border-radius: 12px;
-    border: 1px solid #333;
+    border: 1px solid var(--border);
 }
 
 .availability-section h2 {
     font-size: 2rem;
     margin-bottom: 25px;
-    color: #ffffff;
+    color: var(--text-primary);
 }
 
 .availability-section p {
     margin-bottom: 18px;
     line-height: 1.9;
     font-size: 1.05rem;
-    color: #b0b0b0;
+    color: var(--text-secondary);
 }
 
 .availability-section strong {
-    color: #e0e0e0;
+    color: var(--text-primary);
 }
 
 /* ============================================
@@ -698,16 +875,16 @@ a:hover {
    ============================================ */
 
 .footer {
-    background: #212121;
-    color: white;
+    background: var(--bg-nav);
+    color: var(--text-primary);
     padding: 35px 20px;
     text-align: center;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--border);
 }
 
 .footer p {
     margin-bottom: 18px;
-    color: #b0b0b0;
+    color: var(--text-secondary);
 }
 
 .social-links {
@@ -717,42 +894,54 @@ a:hover {
 }
 
 .social-links a {
-    color: #b0b0b0;
+    color: var(--text-secondary);
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .social-links a:hover {
-    color: #64b5f6;
+    color: var(--accent);
 }
 
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */
 
+@media (max-width: 900px) {
+    .nav-container {
+        flex-wrap: wrap;
+    }
+}
+
 @media (max-width: 768px) {
     .hero-title {
         font-size: 2.2rem;
     }
-    
+
     .hero-subtitle {
         font-size: 1.3rem;
     }
-    
+
+    .nav-right {
+        width: 100%;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
     .nav-menu {
         flex-direction: column;
         gap: 10px;
     }
-    
+
     .skills-grid,
     .projects-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .hero-buttons {
         flex-direction: column;
     }
-    
+
     .expertise-grid {
         grid-template-columns: 1fr;
     }
@@ -774,7 +963,6 @@ a:hover {
     margin-top: 35px;
 }
 
-/* Responsive adjustments */
 @media (max-width: 1200px) {
     .values-grid-full {
         grid-template-columns: repeat(2, 1fr);
@@ -794,7 +982,7 @@ a:hover {
 /* Project number styling */
 .project-number {
     font-size: 0.85rem;
-    color: #64b5f6;
+    color: var(--accent);
     font-weight: 600;
     margin-bottom: 8px;
     text-transform: uppercase;

@@ -6,13 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Doug Chingosho</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <style>
         .form-group {
             margin-bottom: 18px;
         }
         .form-group label {
             display: block;
-            color: #e0e0e0;
+            color: var(--text-primary);
             font-weight: 600;
             margin-bottom: 7px;
             font-size: 0.9rem;
@@ -21,10 +25,10 @@
         .form-group textarea {
             width: 100%;
             padding: 12px 14px;
-            background: #1a1a1a;
-            border: 1px solid #444;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
             border-radius: 6px;
-            color: #e0e0e0;
+            color: var(--text-primary);
             font-size: 0.95rem;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             transition: border-color 0.3s ease;
@@ -33,11 +37,11 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #2196f3;
+            border-color: var(--accent);
         }
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: #666;
+            color: var(--text-secondary);
         }
         .form-group textarea {
             height: 140px;
@@ -51,8 +55,8 @@
         .btn-submit {
             width: 100%;
             padding: 13px;
-            background: #2196f3;
-            color: white;
+            background: var(--accent);
+            color: var(--text-on-accent);
             border: none;
             border-radius: 6px;
             font-size: 1rem;
@@ -63,15 +67,15 @@
             margin-top: 4px;
         }
         .btn-submit:hover {
-            background: #1976d2;
+            background: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(33,150,243,0.4);
+            box-shadow: 0 6px 20px var(--shadow-strong);
         }
         .form-success {
             display: none;
-            background: #1b5e20;
-            border: 1px solid #2e7d32;
-            color: #a5d6a7;
+            background: var(--success-bg);
+            border: 1px solid var(--success-text);
+            color: var(--success-text);
             padding: 14px;
             border-radius: 6px;
             margin-top: 14px;
@@ -79,8 +83,9 @@
         }
         .form-error {
             display: none;
-            background: #b71c1c;
-            color: #ffcdd2;
+            background: var(--error-bg);
+            border: 1px solid var(--error-text);
+            color: var(--error-text);
             padding: 14px;
             border-radius: 6px;
             margin-top: 14px;
@@ -88,13 +93,23 @@
         }
         .form-divider {
             border: none;
-            border-top: 1px solid #333;
+            border-top: 1px solid var(--border);
             margin: 24px 0;
         }
         @media (max-width: 600px) {
             .form-row { grid-template-columns: 1fr; }
         }
     </style>
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                if (saved === 'light' || saved === 'dark') {
+                    document.documentElement.setAttribute('data-theme', saved);
+                }
+            } catch (e) {}
+        })();
+    </script>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -104,12 +119,15 @@
                 <img src="logo.png" alt="DC Logo" class="logo-img">
                 Doug Chingosho
             </a>
-            <ul class="nav-menu">
-                <li><a href="https://dougchingosho.com" class="nav-link">Home</a></li>
-                <li><a href="https://dougchingosho.com/about" class="nav-link">About</a></li>
-                <li><a href="https://dougchingosho.com/projects" class="nav-link">Projects</a></li>
-                <li><a href="https://dougchingosho.com/contact" class="nav-link active">Contact</a></li>
-            </ul>
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li><a href="https://dougchingosho.com" class="nav-link">Home</a></li>
+                    <li><a href="https://dougchingosho.com/about" class="nav-link">About</a></li>
+                    <li><a href="https://dougchingosho.com/projects" class="nav-link">Projects</a></li>
+                    <li><a href="https://dougchingosho.com/contact" class="nav-link active">Contact</a></li>
+                </ul>
+                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+            </div>
         </div>
     </nav>
 
@@ -150,7 +168,7 @@
                 <!-- Contact Form — added form fields only, heading/links unchanged -->
                 <div class="contact-form-container">
                     <h2>Send a Message</h2>
-                    <p style="color: #b0b0b0; margin-bottom: 20px;">
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">
                         Feel free to shoot a quick message below !
                     </p>
 
@@ -205,6 +223,29 @@
         </div>
     </footer>
 
+    <script>
+        (function () {
+            var btn = document.getElementById('themeToggle');
+            if (!btn) return;
+            function current() {
+                var attr = document.documentElement.getAttribute('data-theme');
+                if (attr) return attr;
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            function updateIcon() {
+                var isDark = current() === 'dark';
+                btn.textContent = isDark ? '☀️' : '🌙';
+                btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+            }
+            updateIcon();
+            btn.addEventListener('click', function () {
+                var next = current() === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                try { localStorage.setItem('theme', next); } catch (e) {}
+                updateIcon();
+            });
+        })();
+    </script>
     <script>
         const form = document.getElementById('contactForm');
         form.addEventListener('submit', async function(e) {

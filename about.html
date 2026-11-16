@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Doug Chingosho</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                if (saved === 'light' || saved === 'dark') {
+                    document.documentElement.setAttribute('data-theme', saved);
+                }
+            } catch (e) {}
+        })();
+    </script>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -14,12 +28,15 @@
                 <img src="logo.png" alt="DC Logo" class="logo-img">
                 Doug Chingosho
             </a>
-            <ul class="nav-menu">
-                <li><a href="https://dougchingosho.com" class="nav-link">Home</a></li>
-                <li><a href="https://dougchingosho.com/about" class="nav-link active">About</a></li>
-                <li><a href="https://dougchingosho.com/projects" class="nav-link">Projects</a></li>
-                <li><a href="https://dougchingosho.com/contact" class="nav-link">Contact</a></li>
-            </ul>
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li><a href="https://dougchingosho.com" class="nav-link">Home</a></li>
+                    <li><a href="https://dougchingosho.com/about" class="nav-link active">About</a></li>
+                    <li><a href="https://dougchingosho.com/projects" class="nav-link">Projects</a></li>
+                    <li><a href="https://dougchingosho.com/contact" class="nav-link">Contact</a></li>
+                </ul>
+                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+            </div>
         </div>
     </nav>
 
@@ -207,4 +224,32 @@
                 <a href="https://github.com/doug1192" target="_blank">GitHub</a>
                 <a href="mailto:douglasc@wustl.edu">Email</a>
             </div>
-     
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var btn = document.getElementById('themeToggle');
+            if (!btn) return;
+            function current() {
+                var attr = document.documentElement.getAttribute('data-theme');
+                if (attr) return attr;
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            function updateIcon() {
+                var isDark = current() === 'dark';
+                btn.textContent = isDark ? '☀️' : '🌙';
+                btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+            }
+            updateIcon();
+            btn.addEventListener('click', function () {
+                var next = current() === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                try { localStorage.setItem('theme', next); } catch (e) {}
+                updateIcon();
+            });
+        })();
+    </script>
+</body>
+</html>
+

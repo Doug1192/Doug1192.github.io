@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Doug Chingosho</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <style>
         .projects-container {
             display: grid;
@@ -15,8 +19,8 @@
             padding: 0 20px;
         }
         .project-card-full {
-            background: #2a2a2a;
-            border: 1px solid #333;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
             border-radius: 12px;
             padding: 35px;
             transition: all 0.3s ease;
@@ -25,12 +29,12 @@
         }
         .project-card-full:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 35px rgba(33, 150, 243, 0.25);
-            border-color: #2196f3;
+            box-shadow: 0 12px 35px var(--shadow-strong);
+            border-color: var(--accent);
         }
         .project-title {
             font-size: 1.6rem;
-            color: #ffffff;
+            color: var(--text-primary);
             margin-bottom: 15px;
         }
         .project-tech-tags {
@@ -40,34 +44,34 @@
             margin-bottom: 20px;
         }
         .tech-badge {
-            background: #1976d2;
-            color: white;
+            background: var(--accent);
+            color: var(--text-on-accent);
             padding: 6px 14px;
             border-radius: 6px;
             font-size: 0.85rem;
             font-weight: 600;
         }
         .project-summary {
-            color: #b0b0b0;
+            color: var(--text-secondary);
             line-height: 1.8;
             margin-bottom: 25px;
             flex-grow: 1;
             font-size: 1.05rem;
         }
         .project-metrics {
-            background: #212121;
+            background: var(--bg-tertiary);
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 25px;
-            border-left: 3px solid #2196f3;
+            border-left: 3px solid var(--accent);
         }
         .metric-item {
-            color: #b0b0b0;
+            color: var(--text-secondary);
             margin-bottom: 8px;
             font-size: 0.95rem;
         }
         .metric-item strong {
-            color: #64b5f6;
+            color: var(--accent);
         }
         .project-buttons {
             display: flex;
@@ -78,8 +82,8 @@
             flex: 1;
             min-width: 150px;
             padding: 12px 24px;
-            background: #2196f3;
-            color: white;
+            background: var(--accent);
+            color: var(--text-on-accent);
             border: none;
             border-radius: 6px;
             font-weight: 600;
@@ -91,17 +95,17 @@
             display: inline-block;
         }
         .btn-app:hover {
-            background: #1976d2;
+            background: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
-            color: white;
+            box-shadow: 0 6px 20px var(--shadow-strong);
+            color: var(--text-on-accent);
         }
         .btn-app-disabled {
             flex: 1;
             min-width: 150px;
             padding: 12px 24px;
-            background: #444;
-            color: #888;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
             border: none;
             border-radius: 6px;
             font-weight: 600;
@@ -115,8 +119,8 @@
             min-width: 150px;
             padding: 12px 24px;
             background: transparent;
-            color: #64b5f6;
-            border: 2px solid #64b5f6;
+            color: var(--accent);
+            border: 2px solid var(--accent);
             border-radius: 6px;
             font-weight: 600;
             cursor: pointer;
@@ -125,8 +129,8 @@
             font-size: 0.95rem;
         }
         .btn-details:hover {
-            background: #64b5f6;
-            color: #1a1a1a;
+            background: var(--accent);
+            color: var(--text-on-accent);
         }
         .modal {
             display: none;
@@ -137,41 +141,41 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.85);
+            background-color: rgba(0,0,0,0.65);
         }
         .modal-content {
-            background-color: #2a2a2a;
+            background-color: var(--card-bg);
             margin: 50px auto;
             padding: 40px;
-            border: 1px solid #333;
+            border: 1px solid var(--border);
             border-radius: 12px;
             width: 90%;
             max-width: 900px;
             max-height: 85vh;
             overflow-y: auto;
-            color: #e0e0e0;
+            color: var(--text-primary);
         }
         .close {
-            color: #b0b0b0;
+            color: var(--text-secondary);
             float: right;
             font-size: 32px;
             font-weight: bold;
             cursor: pointer;
             transition: color 0.3s ease;
         }
-        .close:hover { color: #64b5f6; }
-        .modal-content h2 { color: #ffffff; margin-bottom: 25px; font-size: 2rem; }
-        .modal-content h3 { color: #64b5f6; margin-top: 30px; margin-bottom: 15px; font-size: 1.4rem; }
+        .close:hover { color: var(--accent); }
+        .modal-content h2 { color: var(--text-primary); margin-bottom: 25px; font-size: 2rem; }
+        .modal-content h3 { color: var(--accent); margin-top: 30px; margin-bottom: 15px; font-size: 1.4rem; }
         .modal-content ul { list-style: none; padding-left: 0; }
-        .modal-content li { padding: 8px 0 8px 25px; position: relative; color: #b0b0b0; line-height: 1.6; }
-        .modal-content li:before { content: "▸"; position: absolute; left: 0; color: #2196f3; font-weight: bold; }
-        .code-block { background: #1a1a1a; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 20px 0; border: 1px solid #333; }
+        .modal-content li { padding: 8px 0 8px 25px; position: relative; color: var(--text-secondary); line-height: 1.6; }
+        .modal-content li:before { content: "▸"; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
+        .code-block { background: var(--bg-code); padding: 20px; border-radius: 8px; overflow-x: auto; margin: 20px 0; border: 1px solid var(--border); }
         .code-block code { color: #e0e0e0; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.5; }
         @media (max-width: 900px) { .projects-container { grid-template-columns: 1fr; } }
         /* ── project-number color preserved ── */
-        .project-number { color: #2196f3; }
+        .project-number { color: var(--accent); }
 
-        /* ── Fullscreen App Overlay ── */
+        /* ── Fullscreen App Overlay (always dark — it's a frame around embedded apps) ── */
         .app-overlay {
             display: none;
             position: fixed;
@@ -183,8 +187,8 @@
         }
         .app-overlay.open { display: flex; }
         .overlay-toolbar {
-            background: #212121;
-            border-bottom: 2px solid #2196f3;
+            background: #1a1a1a;
+            border-bottom: 2px solid var(--accent);
             padding: 0 20px;
             display: flex;
             justify-content: space-between;
@@ -225,6 +229,16 @@
         }
 
     </style>
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                if (saved === 'light' || saved === 'dark') {
+                    document.documentElement.setAttribute('data-theme', saved);
+                }
+            } catch (e) {}
+        })();
+    </script>
 </head>
 <body>
 
@@ -283,12 +297,15 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="https://dougchingosho.com" class="nav-logo"><img src="logo.png" alt="DC Logo" class="logo-img">Doug Chingosho</a>
-            <ul class="nav-menu">
-                <li><a href="https://dougchingosho.com" class="nav-link">Home</a></li>
-                <li><a href="https://dougchingosho.com/about" class="nav-link">About</a></li>
-                <li><a href="https://dougchingosho.com/projects" class="nav-link active">Projects</a></li>
-                <li><a href="https://dougchingosho.com/contact" class="nav-link">Contact</a></li>
-            </ul>
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li><a href="https://dougchingosho.com" class="nav-link">Home</a></li>
+                    <li><a href="https://dougchingosho.com/about" class="nav-link">About</a></li>
+                    <li><a href="https://dougchingosho.com/projects" class="nav-link active">Projects</a></li>
+                    <li><a href="https://dougchingosho.com/contact" class="nav-link">Contact</a></li>
+                </ul>
+                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+            </div>
         </div>
     </nav>
 
@@ -299,7 +316,7 @@
         </div>
     </section>
 
-    <section class="projects-section" style="background: #1a1a1a; padding: 40px 20px;">
+    <section class="projects-section" style="background: var(--bg-primary); padding: 40px 20px;">
         <div class="projects-container">
 
             <!-- PROJECT 1: Black-Scholes -->
@@ -312,8 +329,9 @@
                     <span class="tech-badge">Quantitative Finance</span>
                 </div>
                 <p class="project-summary">
-                    Interactive web application for pricing European options using the Black-Scholes-Merton model. 
-                    Features real-time Greeks calculation, volatility analysis, and Monte Carlo simulations.
+                    <strong>Problem:</strong> Options desks and students need a fast, free way to sanity-check vendor-quoted option prices without a Bloomberg terminal.<br>
+                    <strong>Approach:</strong> Built an interactive Streamlit app implementing the Black-Scholes-Merton model with closed-form Greeks, cross-validated against a 10,000+ path Monte Carlo engine.<br>
+                    <strong>Result:</strong> Prices match Bloomberg within 99.9% accuracy, with Delta, Gamma, Theta, Vega, and Rho computed in real time.
                 </p>
                 <div class="project-metrics">
                     <div class="metric-item"><strong>Accuracy:</strong> 99.9% vs Bloomberg</div>
@@ -361,9 +379,9 @@
                     <span class="tech-badge">Netlify</span>
                 </div>
                 <p class="project-summary">
-                    Full-stack web-based sales tracking application built for an Infinite Reach direct sales team. 
-                    Features role-based access control, real-time leaderboards, audit trails, and Excel export — 
-                    enabling managers and reps to track performance and drive accountability across the team.
+                    <strong>Problem:</strong> Infinite Reach's direct sales team had no shared system for tracking rep performance — managers pieced numbers together manually and reps couldn't see where they stood.<br>
+                    <strong>Approach:</strong> Built a full-stack web app (JavaScript, Supabase/PostgreSQL, Netlify) with role-based access control, so admins, managers, and reps each see the right slice of data.<br>
+                    <strong>Result:</strong> Live leaderboards, audit trails, and one-click Excel export now give the team real-time visibility and accountability it didn't have before.
                 </p>
                 <div class="project-metrics">
                     <div class="metric-item"><strong>Backend:</strong> Supabase PostgreSQL with Row-Level Security</div>
@@ -386,8 +404,9 @@
                     <span class="tech-badge">XGBoost</span>
                 </div>
                 <p class="project-summary">
-                    Predictive model for loan default risk using ensemble machine learning. 
-                    Analyzes 50+ features including credit history, income, and payment patterns.
+                    <strong>Problem:</strong> Lenders need to flag likely defaults early, but simple credit-score cutoffs miss risk signal buried in actual payment behavior.<br>
+                    <strong>Approach:</strong> Trained an ensemble XGBoost classifier on 50+ features spanning credit history, income, and payment patterns.<br>
+                    <strong>Result:</strong> 87% accuracy and 0.91 ROC-AUC, with 83% precision and 79% recall — catching more true defaults while keeping false flags low.
                 </p>
                 <div class="project-metrics">
                     <div class="metric-item"><strong>Accuracy:</strong> 87%</div>
@@ -616,6 +635,29 @@ def black_scholes_price(S, K, T, r, sigma, option_type='call'):<br>
         </div>
     </footer>
 
+    <script>
+        (function () {
+            var btn = document.getElementById('themeToggle');
+            if (!btn) return;
+            function current() {
+                var attr = document.documentElement.getAttribute('data-theme');
+                if (attr) return attr;
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            function updateIcon() {
+                var isDark = current() === 'dark';
+                btn.textContent = isDark ? '☀️' : '🌙';
+                btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+            }
+            updateIcon();
+            btn.addEventListener('click', function () {
+                var next = current() === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                try { localStorage.setItem('theme', next); } catch (e) {}
+                updateIcon();
+            });
+        })();
+    </script>
     <script>
         // ── Fullscreen overlay ──
         function openOverlay(overlayId, frameId, url) {
